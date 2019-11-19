@@ -1,0 +1,120 @@
+<html>
+<head>
+<title> home </title>
+<link rel="stylesheet" href="home.css" type="text/css" />
+</head>
+
+<body onload="init()">
+<div id="wrapper">
+    <header id="main_header"><a href="home.html"><img src="logo.png" width = "108.5"height = "70"></a></header>
+
+
+    <button id="default" class="tab" onclick="openMenu('About', this, 'tomato')">장르</button>
+    <button class="tab" onclick="openMenu('Products', this, 'darkolivegreen')">플랫폼</button>
+    <button class="tab" onclick="openMenu('Technology', this, 'dodgerblue')">연령대</button>
+    <button class="tab" onclick="openMenu('Downloads', this, 'orange')"><img src="search.png" width = "30"height = "30"></button>
+    
+    <div id="About" class="content">
+      <p>&nbsp 일상 &nbsp | &nbsp 개그 &nbsp | &nbsp 판타지 &nbsp | &nbsp 액션 &nbsp | &nbsp 드라마 &nbsp | &nbsp 순정 &nbsp | &nbsp 감성 &nbsp | &nbsp 스릴러 &nbsp | &nbsp 시대극 &nbsp | &nbsp 스포츠 &nbsp</p>
+    </div>
+
+    <div id="Products" class="content">
+      <p>&nbsp 네이버 &nbsp | &nbsp 다음 &nbsp | &nbsp 레진코믹스 &nbsp | &nbsp 봄툰 &nbsp  </p>
+    </div>
+
+    <div id="Technology" class="content">
+      <p>&nbsp 10대 &nbsp | &nbsp 20대 &nbsp | &nbsp 30대 &nbsp</p>
+    </div>
+
+    <div id="Downloads" class="content">
+      <p>검색기능 만들기</p>
+    </div>
+
+
+<section id="main_section">
+	<article>
+		<header>
+		<hgroup>
+			<h1> 실시간 랭킹 </h1>
+		</hgroup>
+		</header>
+            <ul> 
+                <br>1 <img src="cat.jpg" width = "30"height = "30"> 냐한남자<br>
+                2 <img src="nogon.jpg" width = "30"height = "30"> 노곤하개<br>  
+                3 <img src="jombi.PNG" width = "30"height = "30"> 좀비딸<br>         
+            </ul>
+	</article>
+
+	<article>
+		<header>
+		<hgroup>
+			<h1> 주간 랭킹 </h1>
+		</hgroup>
+		</header>
+            <ul> 
+                <br>1 <img src="cat.jpg" width = "30"height = "30"> 냐한남자<br>
+                2 <img src="nogon.jpg" width = "30"height = "30"> 노곤하개<br>  
+                3 <img src="jombi.PNG" width = "30"height = "30"> 좀비딸<br>         
+            </ul>
+	</article>
+    
+
+	</section>
+
+<aside id="main_aside"> 
+    <article>
+        <header>
+		<hgroup>
+			<h1> 오늘의 BEST 리뷰 </h1>
+		</hgroup>
+		</header>
+            <ul> 
+                <br>1 닉네임1 
+                <img src="suneung.jpg" width = "30"height = "30">
+                수능일기&nbsp&nbsp
+                여러분 수능일기를 보세요<br>   
+                <br>2 닉네임2 
+                <img src="cat.jpg" width = "30"height = "30">
+                냐한남자&nbsp&nbsp
+                여러분 냐한남자를 보세요<br>  
+            </ul>
+	</article>
+    
+    <article>
+		<header>
+		<hgroup>
+			<h1> 자유게시판 </h1>
+		</hgroup>
+		</header>
+            <ul> 
+                <br><p class=nickname>닉네임1 </p> 
+                냐한남자 오늘 화 재밌다~<br>
+                <br><p class=nickname>닉네임2 </p> 
+                네이버웹툰은 어쩌구 다음은 어쩌구~<br>       
+            </ul>
+	</article>
+</aside>
+
+<footer id="main_footer"> 통합형 리뷰 포럼 웹 어플리케이션, tooneview </footer>
+</div>
+    
+        <script>
+        function init(){document.getElementById("default").onclick();
+        }
+        function openMenu(target, seltab) {
+            var i,content, tab; content=document.getElementsByClassName("content");
+            for(i=0;i<content.length;i++){
+                content[i].style.display="none";
+            } document.getElementById(target).style.display="block";
+            tab=document.getElementsByClassName(seltab.className);
+            for(i=0;i<tab.length;i++){
+                tab[i].style.backgroundColor="";
+                tab[i].style.color="white";
+            }
+            seltab.style.backgroundColor="white";
+            seltab.style.color="#fac706";
+        }
+        
+    </script>
+</body>
+</html>
