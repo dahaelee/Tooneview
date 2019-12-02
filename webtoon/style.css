@@ -1,0 +1,240 @@
+﻿/*마진은 위오아래왼 시계방향*/
+
+* { margin: 0px; padding: 0px; }
+
+h1 { font: bold 20px verdana, sans-serif; }
+h2 { font: bold 14px verdana, sans-serif; }
+
+header, section, footer, aside, nav, article, figure, figcaption, hgroup { display: block; }
+
+body { text-align: center; }
+
+/*하이퍼링크 색깔 없애기*/ 
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration: none;}
+
+#wrapper {
+	width: 1000px;
+	margin: 15px auto;
+	text-align: left;
+}
+
+#main_header{
+    text-align: center;
+	background: white;
+	border: 1px solid white;
+	padding-bottom: 20px;
+}
+
+#mypage{
+    position:absolute;
+    top:20px;
+    right:135px;
+}
+
+.tab {
+    background-color: #fac706;
+    color: white;
+    float: left;
+    border: none;
+    outline:2px solid #fac706;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 17px;
+    font-weight:bold;
+    font-weight:bold;
+    width: 25%;
+}
+
+.tab:hover {
+    background-color: #fcdd6a;
+    outline:2px solid #fac706;
+}
+
+.content{
+    width:700;
+}
+
+#tab_list {
+    list-style:none;
+    margin:0;
+    padding-top:30px;
+}
+
+#tab_list li {
+    padding: 0 20 0 0;
+    border : 0;
+    display:inline; 
+}
+
+#tab_list li:hover{
+    FONT-WEIGHT: bolder
+}
+
+#main_section{ 
+    float: left; 
+    width: 400px; 
+    margin: 0 15 15 0; 
+    border: 3px solid #fac706; 
+    padding: 15px;
+} 
+
+#main_section h1{
+    text-align: center; 
+    color:#fac706;
+    padding-bottom: 15;
+}
+
+.article {
+    display: block;
+    padding: 5px;
+    margin: 0 0 2 0;
+    border: 1px solid #999999;
+}
+
+.article:hover{
+    background-color: #fcdd6a;
+}
+
+#main_aside{ 
+	float: left; 
+    width: 210px; 
+    margin: 0 15 15 0; 
+    border: 3px solid #fac706; 
+    padding: 15px;
+}
+
+#main_aside h1{
+    text-align: center; 
+    color:#fac706;
+    padding-bottom: 15;
+}
+
+.rank_table {
+    float: center;
+    text-align: center; 
+    margin: 0 5px 5px 0;
+    padding: 5;
+    width: 200px;
+    overflow: hidden;
+    background-color: #fff;
+    border-collapse: collapse;
+}
+
+.rank_table td{
+        border: 1px solid #999999;
+}
+
+.rank_table tr:hover{
+        background-color:#fcdd6a;
+}
+
+#main_footer{ clear: both; 
+	text-align: center; 
+	padding: 20px; 
+	border-top: 2px solid #999999; 
+    color:737373;
+}
+
+#login_section{ 
+    float: left; width: 230px; margin: 20px;
+    width: 400px;
+    height:400px;
+    text-align:center;
+}
+
+#login_section article{
+    vertical-align: middle;
+}
+
+#login{
+    text-align: center; 
+    color:#fac706;
+    font: bold 20px verdana, sans-serif
+}
+
+#container{
+    width:100%;
+    text-align:center;
+    padding : 20px;
+    margin : 15px;
+}
+#login_table{
+    width:100%;
+    text-align:center;
+    padding : 20px;
+    margin : 15px;
+}
+#login_tbody{
+    display:inline-block;
+    width:70%;
+    height:90%;
+    text-align:center;
+}
+
+#login_content{
+    display:inline-block;
+    width:50%;
+    height:90%;
+}
+
+#login{
+    text-align: center;
+}
+
+#container { background : white; 
+	border:5px solid #fac706; 
+	padding: 20px; 
+	margin-bottom: 15px; }
+
+time { color: #c2c2c2; }
+
+div {
+width: 100px;
+margin: 20px;
+padding: 10px;
+
+-chrome-box-sizing: border-box;
+-webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+/*
+input{
+    font-size:16px;
+    width:200px;
+    padding:0px;
+    border:0px;
+    outline:none;
+    float:left;
+}
+#searchButton{
+    height:40px;
+    width:400px;
+    border:1px solid #1b5ac2;
+    background:#ffffff;
+}
+#search{
+    width:50px;
+    height:100%;
+    border:0px;
+    background:#1b5ac2;
+    outline:none;
+    float:right;
+    color:#ffffff;
+}
+*/
+
+.nickname {
+    font: bold 16px verdana, sans-serif;
+}
+
+.post_date {color :#808080}
+
+/*은아추가1202*/
+#mypageTable{
+    border-right:none;
+    border-left:none;
+    border-top:none;    
+    border-bottom:none;
+}
