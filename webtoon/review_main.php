@@ -55,7 +55,7 @@ a:hover { color: #fac706; text-decoration: none;}
 
     <div id="wrapper">
         <header id="main_header">
-            <a href="home.html"><img src="logo.png" width="144" height="93"></a>
+            <a href="home.php"><img src="logo.png" width="144" height="93"></a>
             <div id="mypage"><a href="login.html"><img src="profile.png" width="40" height="40"></a></div>
         </header>
 
@@ -66,7 +66,7 @@ a:hover { color: #fac706; text-decoration: none;}
 
         <div id="Genre" class="content">
             <ul id=tab_list>
-                <li><a href="genre_ilsang.html">일상</a></li>
+                <li><a href="genre_ilsang.php">일상</a></li>
                 <li><a href="genre_gag.html">개그</a></li>
                 <li><a href="genre_fantasy.html">판타지</a></li>
                 <li><a href="genre_action.html">액션</a></li>

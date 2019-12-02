@@ -42,7 +42,7 @@
 
         <div id="Genre" class="content">
             <ul id=tab_list>
-                <li><a href="genre_ilsang.html">일상</a></li>
+                <li><a href="genre_ilsang.php">일상</a></li>
                 <li><a href="genre_gag.html">개그</a></li>
                 <li><a href="genre_fantasy.html">판타지</a></li>
                 <li><a href="genre_action.html">액션</a></li>
