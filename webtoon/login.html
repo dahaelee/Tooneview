@@ -1,0 +1,50 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <meta charset="utf-8">
+
+<title> Log in </title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body onload="init()">
+    <div id="wrapper">
+        <header id="main_header"><a href="home.php"><img src="logo.png" width = "162.75"height = "105"></a></header>
+        <div id="container">
+            <div id="login_content">
+                <form action="login-result.php" method="post">
+                     <fieldset>
+    <p><label for="userID">ID</label>
+    <input type="text" id="userID" name="userID" maxlength="13" size="13" /></p>
+    <p><label for="password">password</label>
+    <input type="password" id="password" name="password" maxlength="30" size="30" /></p>
+  </fieldset>
+                     <p><input type="submit" value="로그인" /></p>
+                </form>
+
+            </div>
+        </div>
+        
+    </div>
+    <script = "text/javascript">
+//        function register() {
+//            if(document.test.id.value==""){
+//                alert("ID를 입력하세요");
+//            }
+//            else if(document.test.password.value==""){
+//                alert("패스워드를 입력하세요");
+//            }
+//		  else{
+//              document.test.submit();
+//       		   alert("회원 가입을 축하합니다.");
+//          }
+//        }
+//        function reWrite() {
+//            alert("다시 입력하세요.");
+//        }
+//        function init() {
+//            document.test.id.focus(); 
+//     	}
+    </script>
+</body>
+</html>
