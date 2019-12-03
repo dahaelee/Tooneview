@@ -126,7 +126,7 @@ a:hover { color: #fac706; text-decoration: none;}
                 </tr>
             </table>
         </form>
-        </br>
+        
         <?php
     while($row=$result->fetch_array()){
       echo "<table id=review_table><tr>";

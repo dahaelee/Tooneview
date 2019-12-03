@@ -54,7 +54,7 @@
             <h1>  </h1>
             <?php
                        
-@$db = mysqli_connect('localhost', 'root', '1234', 'first');
+@$db = mysqli_connect('localhost', 'root', 'king', 'first');
     if (mysqli_connect_errno()) {
        echo "<p>Error: Could not connect to database.<br/>
              Please try again later.</p>";
@@ -65,20 +65,17 @@
             //select webtoon_id from webtoon_info where genre like '%일상%';
         $result=mysqli_query($db, $query);
         $row=mysqli_fetch_array($result);
-        
+        $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
             for($count=1;$count<=$i;$count++){
                 echo " <a class='article' href='review_main.php'>
                 <p>
-                    $count 리뷰내용
+                    
+                    $webtoon_name
                 </p>
             </a>";    
                  echo "<br/>";  
             }
-        if($result->num_rows==1){
-            $webtoon_name=$row['webtoon_name'];
-            echo $webtoon_name;
-        }
 
 
      $db->close();
