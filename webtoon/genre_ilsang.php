@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 
 <head>
     <meta charset="utf-8">
@@ -61,21 +61,32 @@
        exit;
     }
         
-        $query = "select * from webtoon_info where genre = 'comic'";
-            //select webtoon_id from webtoon_info where genre like '%일상%';
+        $query = "select * from webtoon_info where genre like '%일상%'";
         $result=mysqli_query($db, $query);
         $row=mysqli_fetch_array($result);
+            $resultArr=array();
+            while($r=mysqli_fetch_assoc($result)){
+                $resultArr[]=$r;
+            }
+            
         $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
-            for($count=1;$count<=$i;$count++){
-                echo " <a class='article' href='review_main.php'>
+            for($count=0;$count<$i-1;$count++){
+                $resulta=$resultArr[$count];
+                $name= $resulta["webtoon_name"];
+	$img_src = $resulta["img_src"];
+	$artist = $resulta["artist"];
+                echo " <a class='article' href='review_main.php' width='300' height='130'>
                 <p>
-                    
-                    $webtoon_name
+		<img src=$img_src width = '100' height='100'>
+                   $name
+		<p style='text-align:right'>
+		$artist
+		</p>
                 </p>
             </a>";    
                  echo "<br/>";  
-            }
+            }            
 
 
      $db->close();
