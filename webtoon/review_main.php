@@ -77,16 +77,17 @@
 
         <div id="Genre" class="content">
             <ul id=tab_list>
-                <li><a href="genre_ilsang.php">일상</a></li>
-                <li><a href="genre_gag.html">개그</a></li>
-                <li><a href="genre_fantasy.html">판타지</a></li>
-                <li><a href="genre_action.html">액션</a></li>
-                <li><a href="genre_drama.html">드라마</a></li>
-                <li><a href="genre_soonjeong.html">순정</a></li>
-                <li><a href="genre_gamseong.html">감성</a></li>
-                <li><a href="genre_thriller.html">스릴러</a></li>
-                <li><a href="genre_sidae.html">시대극</a></li>
-                <li><a href="genre_sports.html">스포츠</a></li>
+
+                <li><a href="genre.php?query=일상">일상</a></li>
+                <li><a href="genre.php?query=개그">개그</a></li>
+                <li><a href="genre.php?query=판타지">판타지</a></li>
+                <li><a href="genre.php?query=액션">액션</a></li>
+                <li><a href="genre.php?query=드라마">드라마</a></li>
+                <li><a href="genre.php?query=순정">순정</a></li>
+                <li><a href="genre.php?query=감성">감성</a></li>
+                <li><a href="genre.php?query=스릴러">스릴러</a></li>
+                <li><a href="genre.php?query=시대극">시대극</a></li>
+                <li><a href="genre.php?query=스포츠">스포츠</a></li>
             </ul>
         </div>
 
@@ -108,19 +109,34 @@
         </div>
 
         <section id="main_section">
-            <h1 id="head">
-                <script>
-                    function getParameterByName(name, url) {
-                        if (!url) url = window.location.href;
-                        name = name.replace(/[\[\]]/g, "\\$&");
-                        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                            results = regex.exec(url);
-                        return results[2];
-                    }
-                    var toonID = getParameterByName("toonID");
-                    document.getElementById("head").innerHTML = toonID;
-                </script>
-            </h1>
+ <h1>
+		<?php
+		$webtoon_id = $_GET["toonID"];
+
+@$db = mysqli_connect('localhost', 'root', 'king', 'first');
+    if (mysqli_connect_errno()) {
+       echo "<p>Error: Could not connect to database.<br/>
+             Please try again later.</p>";
+       exit;
+    }
+        
+        $query = "select * from webtoon_info where webtoon_id = $webtoon_id";
+$web_info=mysqli_query($db, $query);
+        $row=mysqli_fetch_array($web_info);
+            
+	$name = $row["webtoon_name"];
+	$img_src = $row["img_src"];
+	$artist = $row["artist"];
+	$description = $row["description"];
+	$platform = $row["platform"];
+	echo "<img src = $img_src>";
+	echo "$name<br>";
+	echo "<p>$description</p>";
+
+
+
+?>
+</h1>
         </section>
 
         <?php
@@ -156,6 +172,33 @@
         else echo'<table id="review_table"><tr><td><font color=#fac706>리뷰를 작성하시려면 로그인하세요.</font></tr></td></table>';
         ?>
 
+        <?php       
+        $ord_array = array('desc','asc'); 
+        $ord_arrow = array('▼','▲'); 
+        $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[1]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(오름차순)
+        $ord_key = array_search($ord,$ord_array); // 해당 키 찾기 (0, 1)
+        if($ord_key==1){
+            $sql = "SELECT * FROM webtoon_review ORDER BY rate DESC";
+            $result = $conn->query($sql) or die($this->_connect->error);}
+        else{
+            $sql = "SELECT * FROM webtoon_review ORDER BY rate ASC";
+            $result = $conn->query($sql) or die($this->_connect->error);}
+        $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
+        ?><a href="?ord=<?php echo $ord_rev; ?>">별점순<?php echo $ord_arrow[$ord_key]; ?></a>
+       
+        <?php       
+        $ord_array = array('desc','asc'); 
+        $ord_arrow = array('▼','▲'); 
+        $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[0]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(내림차순)
+        $ord_key = array_search($ord,$ord_array); // 해당 키 찾기 (0, 1)
+        if($ord_key==0){
+            $sql = "SELECT * FROM webtoon_review ORDER BY review_id DESC";
+            $result = $conn->query($sql) or die($this->_connect->error);}
+        else{
+            $sql = "SELECT * FROM webtoon_review ORDER BY review_id ASC";
+            $result = $conn->query($sql) or die($this->_connect->error);}
+        $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
+        ?><a href="?ord=<?php echo $ord_rev; ?>">등록일순<?php echo $ord_arrow[$ord_key]; ?></a>
         <?php
     while($row=$result->fetch_array()){
       echo "<table id=review_table><tr>";

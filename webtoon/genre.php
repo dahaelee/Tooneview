@@ -20,16 +20,17 @@
 
         <div id="Genre" class="content">
             <ul id=tab_list>
-                <li><a href="genre_ilsang.php">일상</a></li>
-                <li><a href="genre_gag.html">개그</a></li>
-                <li><a href="genre_fantasy.html">판타지</a></li>
-                <li><a href="genre_action.html">액션</a></li>
-                <li><a href="genre_drama.html">드라마</a></li>
-                <li><a href="genre_soonjeong.html">순정</a></li>
-                <li><a href="genre_gamseong.html">감성</a></li>
-                <li><a href="genre_thriller.html">스릴러</a></li>
-                <li><a href="genre_sidae.html">시대극</a></li>
-                <li><a href="genre_sports.html">스포츠</a></li>
+
+                <li><a href="genre.php?query=일상">일상</a></li>
+                <li><a href="genre.php?query=개그">개그</a></li>
+                <li><a href="genre.php?query=판타지">판타지</a></li>
+                <li><a href="genre.php?query=액션">액션</a></li>
+                <li><a href="genre.php?query=드라마">드라마</a></li>
+                <li><a href="genre.php?query=순정">순정</a></li>
+                <li><a href="genre.php?query=감성">감성</a></li>
+                <li><a href="genre.php?query=스릴러">스릴러</a></li>
+                <li><a href="genre.php?query=시대극">시대극</a></li>
+                <li><a href="genre.php?query=스포츠">스포츠</a></li>
             </ul>
         </div>
 
@@ -53,7 +54,8 @@
         <section>
             <h1> </h1>
             <?php
-                       
+                       $genre = $_GET["query"];
+	echo $genre;
 @$db = mysqli_connect('localhost', 'root', 'king', 'first');
     if (mysqli_connect_errno()) {
        echo "<p>Error: Could not connect to database.<br/>
@@ -61,7 +63,7 @@
        exit;
     }
         
-        $query = "select * from webtoon_info where genre like '%일상%'";
+        $query = "select * from webtoon_info where genre like '%$genre%'";
         $result=mysqli_query($db, $query);
         $row=mysqli_fetch_array($result);
             $resultArr=array();
@@ -71,7 +73,9 @@
             
         $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
-            for($count=0;$count<$i-1;$count++){
+	echo $i;
+	echo count($resultArr);
+            for($count=0;$count<count($resultArr);$count++){
                 $resulta=$resultArr[$count];
                 $name= $resulta["webtoon_name"];
    $img_src = $resulta["img_src"];
