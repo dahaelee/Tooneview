@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <!--search result & search & home 수정함-->
 <head>
     <meta charset="utf-8">
@@ -86,7 +86,7 @@
        exit;
     }
         
-            $query = "select * from webtoon_info where webtoon_id =   $searchWord";
+            $query = "select * from webtoon_info where webtoon_name like '%$searchWord%'";
             //select webtoon_id from webtoon_info where genre like '%일상%';
             $result=mysqli_query($db, $query);
             $row=mysqli_fetch_array($result);
@@ -97,8 +97,9 @@
             
             $i=$result->num_rows;
             echo $i;
-            for($count=0;$count<$i-1;$count++){
+            for($count=0;$count<$i;$count++){
                 $resulta=$resultArr[$count];
+	$img_src = $resulta["img_src"];
                 $name= $resulta["webtoon_name"];
                 echo " <a class='article' href='review_main.php'>
                 <p>

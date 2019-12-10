@@ -20,16 +20,16 @@
 
         <div id="Genre" class="content">
             <ul id=tab_list>
-                    <li><a href="genre_ilsang.php">일상</a></li>
-                    <li><a href="genre_gag.html">개그</a></li>
-                    <li><a href="genre_fantasy.html">판타지</a></li>
-                    <li><a href="genre_action.html">액션</a></li>
-                    <li><a href="genre_drama.html">드라마</a></li>
-                    <li><a href="genre_soonjeong.html">순정</a></li>
-                    <li><a href="genre_gamseong.html">감성</a></li>
-                    <li><a href="genre_thriller.html">스릴러</a></li>
-                    <li><a href="genre_sidae.html">시대극</a></li>
-                    <li><a href="genre_sports.html">스포츠</a></li>
+                <li><a href="genre_ilsang.php">일상</a></li>
+                <li><a href="genre_gag.html">개그</a></li>
+                <li><a href="genre_fantasy.html">판타지</a></li>
+                <li><a href="genre_action.html">액션</a></li>
+                <li><a href="genre_drama.html">드라마</a></li>
+                <li><a href="genre_soonjeong.html">순정</a></li>
+                <li><a href="genre_gamseong.html">감성</a></li>
+                <li><a href="genre_thriller.html">스릴러</a></li>
+                <li><a href="genre_sidae.html">시대극</a></li>
+                <li><a href="genre_sports.html">스포츠</a></li>
             </ul>
         </div>
 
@@ -49,9 +49,9 @@
                 <li><a href="age_30.html">30대</a></li>
             </ul>
         </div>
-<!--------------------------------------------------------------->
+        <!--------------------------------------------------------------->
         <section>
-            <h1>  </h1>
+            <h1> </h1>
             <?php
                        
 @$db = mysqli_connect('localhost', 'root', 'king', 'first');
@@ -74,15 +74,16 @@
             for($count=0;$count<$i-1;$count++){
                 $resulta=$resultArr[$count];
                 $name= $resulta["webtoon_name"];
-	$img_src = $resulta["img_src"];
-	$artist = $resulta["artist"];
-                echo " <a class='article' href='review_main.php' width='300' height='130'>
+   $img_src = $resulta["img_src"];
+   $artist = $resulta["artist"];
+                $webtoon_id=$resulta["webtoon_id"];
+                echo " <a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>
                 <p>
-		<img src=$img_src width = '100' height='100'>
+      <img src=$img_src width = '100' height='100'>
                    $name
-		<p style='text-align:right'>
-		$artist
-		</p>
+      <p style='text-align:right'>
+      $artist
+      </p>
                 </p>
             </a>";    
                  echo "<br/>";  
