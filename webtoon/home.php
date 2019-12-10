@@ -38,7 +38,7 @@
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
         <button id="platform" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
         <button id="age" class="tab" onclick="openMenu('Age', this)">연령대</button>
-        <button class="tab"><a href="search.html"></a><img src="search.png" width="22.5" height="22.5"></button>
+        <a href="search.php"><button class="tab"><img src="search.png" width="22.5" height="22.5"></button></a>
 
         <div id="Genre" class="content">
             <ul id=tab_list>
