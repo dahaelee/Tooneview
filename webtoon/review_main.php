@@ -11,10 +11,20 @@
 <body onload="init()">
 
     <style>
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
 
-a:link { color: black; text-decoration: none;}
-a:visited { color: black; text-decoration: none;}
-a:hover { color: #fac706; text-decoration: none;}
+        a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #fac706;
+            text-decoration: none;
+        }
 
         #review_table {
             border: 1px solid #999999;
@@ -37,20 +47,21 @@ a:hover { color: #fac706; text-decoration: none;}
 
         .rtb {
             border: 1px solid #999999;
-	text-align: center;
+            text-align: center;
         }
 
         .star_select {
             width: 70px;
             padding: inherit;
         }
+
     </style>
 
     <?php
-	$conn = mysqli_connect("localhost","root","king");
-	$db = mysqli_select_db($conn,"first");	
-	$sql = "SELECT * FROM webtoon_review ORDER BY webtoon_id DESC";
-	$result = $conn->query($sql) or die($this->_connect->error);
+   $conn = mysqli_connect("localhost","root","king");
+   $db = mysqli_select_db($conn,"first");   
+   $sql = "SELECT * FROM webtoon_review ORDER BY review_id DESC";
+   $result = $conn->query($sql) or die($this->_connect->error);
     ?>
 
     <div id="wrapper">
@@ -97,14 +108,29 @@ a:hover { color: #fac706; text-decoration: none;}
         </div>
 
         <section id="main_section">
-            <h1>웹툰 정보</h1>
+            <h1 id="head">
+                <script>
+                    function getParameterByName(name, url) {
+                        if (!url) url = window.location.href;
+                        name = name.replace(/[\[\]]/g, "\\$&");
+                        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                            results = regex.exec(url);
+                        return results[2];
+                    }
+                    var toonID = getParameterByName("toonID");
+                    document.getElementById("head").innerHTML = toonID;
+                </script>
+            </h1>
         </section>
 
-        <form action="review_insert.php" method="post">
+        <?php
+        if(isset($_SESSION["user_id"])) { 
+            echo'
+        <form action="review_insert.php" method="post" >
             <table id="review_table">
                 <tr>
                     <td class="rtb" width="80" align=center>닉네임</td>
-                    <td width="100" align=center><?php echo $_SESSION['user_id'] ?></td>
+                    <td width="100" align=center> $_SESSION["nickname"] </td>
                     <td class="rtb" width="80" align=center>별점</td>
                     <td width="100" align=center>
                         <select class="star_select" name="starpoint">
@@ -123,18 +149,24 @@ a:hover { color: #fac706; text-decoration: none;}
                 </tr>
                 <tr>
                     <td colspan=4 align=right><input type="submit" value="등록"></td>
-                </tr>
+                </tr>    
             </table>
-        </form>
+        </form>';}
         
+        else echo'<table id="review_table"><tr><td><font color=#fac706>리뷰를 작성하시려면 로그인하세요.</font></tr></td></table>';
+        ?>
+
         <?php
     while($row=$result->fetch_array()){
       echo "<table id=review_table><tr>";
-      echo "<td class=rtb width=80>No. $row[webtoon_id]</td>";
-      echo "<td width=200 align=center>$row[user_name]</td>";
-      echo "<td width=300 align=center>$row[review_date]</td>";
-      echo "<td class=rtb width=50><a href='modifycheck.php?id=$row[webtoon_id]'>수정</a></td>";
-      echo "<td class=rtb width=50><a href='delete.php?id=$row[webtoon_id]'>삭제</a></td></tr>";
+      echo "<td class=rtb width=100>$row[user_name]</td>";
+      echo "<td width=120 align=center><font color=#fac706>$row[rate]점</font></td>";    
+      echo "<td width=250 align=center>$row[review_date]</td>";
+        if(isset($_SESSION['user_id'])){
+            if(strcmp($_SESSION['user_id'],$row['user_id'])==0){
+                echo "<td class=rtb width=100><a href='review_delete.php?review_id=$row[review_id]'>삭제</a></td></tr>";
+            }
+        }
       echo "<tr><td colspan=5>$row[review_content]</td>";
       echo "</tr></table>";
     }
