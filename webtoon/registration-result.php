@@ -38,8 +38,8 @@
     $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-        echo  "<p>회원가입이 완료되었습니다.</p>";
-        echo "id는 ".$userID." 입니다.".$sex."";
+        echo  "<p>회원가입이 완료되었습니다.</p><br>";
+        echo $nickname."님 환영합니다.";
     } else {
         echo "<p>An error has occurred.<br/>
               The item was not added.</p>";

@@ -67,7 +67,26 @@
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
-            <div id="mypage"><a href="login.html"><img src="profile.png" width="40" height="40"></a></div>
+            <div id="mypage">
+                <?php
+            if(!isset($_SESSION['user_id']) ) {
+                echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
+            }
+                else{
+                    echo "<table>
+                <tr>
+                    <td>
+                        <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
+                    </td>
+                    <td>
+                        <a href='logout.php'>로그아웃</a>
+                    </td>
+                </tr>
+                
+                </table> ";
+                }
+            ?>
+            </div>
         </header>
 
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
@@ -140,36 +159,37 @@ $web_info=mysqli_query($db, $query);
         </section>
 
         <?php
+        $nickname=$_SESSION["nickname"];
         if(isset($_SESSION["user_id"])) { 
-            echo'
-        <form action="review_insert.php" method="post" >
-            <table id="review_table">
+            echo"
+        <form action='review_insert.php' method='post' >
+            <table id='review_table'>
                 <tr>
-                    <td class="rtb" width="80" align=center>닉네임</td>
-                    <td width="100" align=center> $_SESSION["nickname"] </td>
-                    <td class="rtb" width="80" align=center>별점</td>
-                    <td width="100" align=center>
-                        <select class="star_select" name="starpoint">
-                            <option value="5">5점</option>
-                            <option value="4">4점</option>
-                            <option value="3">3점</option>
-                            <option value="2">2점</option>
-                            <option value="1">1점</option>
+                    <td class='rtb' width='80' align=center>닉네임</td>
+                    <td width='100' align=center> $nickname </td>
+                    <td class='rtb' width='80' align=center>별점</td>
+                    <td width='100' align=center>
+                        <select class='star_select' name='starpoint'>
+                            <option value='5'>5점</option>
+                            <option value='4'>4점</option>
+                            <option value='3'>3점</option>
+                            <option value='2'>2점</option>
+                            <option value='1'>1점</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td colspan=4>
-                        <textarea class="review_text" placeholder="내용을 입력하세요" name="content" rows="8" cols="85"></textarea>
+                        <textarea class='review_text' placeholder='내용을 입력하세요' name='content' rows='8' cols='85'></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan=4 align=right><input type="submit" value="등록"></td>
+                    <td colspan=4 align=right><input type='submit' value='등록'></td>
                 </tr>    
             </table>
-        </form>';}
+        </form>";}
         
-        else echo'<table id="review_table"><tr><td><font color=#fac706>리뷰를 작성하시려면 로그인하세요.</font></tr></td></table>';
+        else echo "<table id='review_table'><tr><td><font color=#fac706>리뷰를 작성하시려면 로그인하세요.</font></tr></td></table>";
         ?>
 
         <?php       
