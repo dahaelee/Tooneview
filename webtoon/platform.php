@@ -10,7 +10,7 @@
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
-            <div id="mypage">               
+            <div id="mypage">
                 <?php
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
@@ -28,15 +28,16 @@
                 
                 </table> ";
                 }
-            ?></div>
+            ?>
+            </div>
         </header>
 
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
         <button id="platform" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
         <button id="age" class="tab" onclick="openMenu('Age', this)">연령대</button>
-        <button class="tab"><a href="search.php"></a><img src="search.png" width="22.5" height="22.5"></button>
+        <a href="search.php"><button class="tab"><img src="search.png" width="22.5" height="22.5"></button></a>
 
-       <div id="Genre" class="content">
+        <div id="Genre" class="content">
             <ul id=tab_list>
 
                 <li><a href="genre.php?query=일상">일상</a></li>
@@ -67,49 +68,48 @@
                 <li><a href="age_30.html">30대</a></li>
             </ul>
         </div>
-<!--------------------------------------------------------------->
-       <div id="container">
-            <div id="login_content">
-                <form action="search-result.php" method="post">
-                     
-    <table>
-        <tr>
-            <td>
-                <select name="searchType" id="searchType"  />
-                <option value="title">제목</option>
-                <option value="artist">작가</option>
-            </td>
-            <td>
-                &nbsp<input type="text" id="searchWord" placeholder="검색어를 입력하세요." name="searchWord" maxlength="30" size="30" />
-            </td>
-            </tr>
-        <tr>
-            <th colspan="2">
-                <button class=btn type="submit" >검색</button>
-            </th>
-        </tr>
-                    </table>                     
-
-         </form>
-
-            </div>
-        </div>
-        
+        <!--------------------------------------------------------------->
         <section>
-            <h1>  </h1>
+            <h1> </h1>
             <?php
-                       
-@$db = mysqli_connect('localhost', 'root', 'king', 'first');
+                       $platform = $_GET["query"];
+	echo $platform;
+            @$db = mysqli_connect('localhost', 'root', 'king', 'first');
     if (mysqli_connect_errno()) {
        echo "<p>Error: Could not connect to database.<br/>
              Please try again later.</p>";
        exit;
     }
         
-        $query = "select * from webtoon_info where genre = 'comic'";
-            //select webtoon_id from webtoon_info where genre like '%일상%';
+        $query = "select * from webtoon_info where platform like '%$platform%'";
         $result=mysqli_query($db, $query);
         $row=mysqli_fetch_array($result);
+            $resultArr=array();
+            while($r=mysqli_fetch_assoc($result)){
+                $resultArr[]=$r;
+            }
+            
+        $webtoon_name=$row['webtoon_name'];
+            $i=$result->num_rows;
+	echo $i;
+	echo count($resultArr);
+            for($count=0;$count<count($resultArr);$count++){
+                $resulta=$resultArr[$count];
+                $name= $resulta["webtoon_name"];
+   $img_src = $resulta["img_src"];
+   $artist = $resulta["artist"];
+                $webtoon_id=$resulta["webtoon_id"];
+                echo " <a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>
+                <p>
+      <img src=$img_src width = '100' height='100'>
+                   $name
+      <p style='text-align:right'>
+      $artist
+      </p>
+                </p>
+            </a>";    
+                 echo "<br/>";  
+            }            
 
 
      $db->close();
@@ -121,7 +121,7 @@
 
     <script>
         function init() {
-            document.getElementById("default").onclick();
+            document.getElementById("platform").onclick();
         }
 
         function openMenu(target, seltab) {
