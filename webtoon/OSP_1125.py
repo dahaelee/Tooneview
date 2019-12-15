@@ -34,7 +34,7 @@ def crawl_info(link):
         print(webtoon_id)
         sql = "INSERT INTO webtoon_info (webtoon_id,webtoon_name,artist,platform,genre,url,description,img_src,age) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s)"
         age = random.randint(10,37)
-        val = (webtoon_id, webtoon_name,artist,"Naver",genre, url, description,img_src,age)
+        val = (None, webtoon_name,artist,"Naver",genre, url, description,img_src,age)
         #age = table.find("span",{"class":"age"}).get_text()     # 연령가 받는데 없는 것에선 오류남 사용하지 말것
 
         
@@ -44,7 +44,7 @@ sql="use first"
 cursor.execute(sql)
 sql = "drop table webtoon_info;"
 cursor.execute(sql)
-sql = "create table webtoon_info( webtoon_id INT NOT NULL, webtoon_name CHAR(100), artist CHAR(30), platform CHAR(30), genre CHAR(50), url VARCHAR(255), description VARCHAR(255), img_src VARCHAR(255), age INT, primary key(webtoon_id) );"
+sql = "create table webtoon_info( webtoon_id INT NOT NULL auto_increment, webtoon_name CHAR(100), artist CHAR(30), platform CHAR(30), genre CHAR(50), url VARCHAR(255), description VARCHAR(255), img_src VARCHAR(255), age INT, primary key(webtoon_id) );"
 cursor.execute(sql)
 url = 'https://comic.naver.com/webtoon/creation.nhn'
 response= requests.get(url)
