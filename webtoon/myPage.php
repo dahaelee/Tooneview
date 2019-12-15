@@ -8,6 +8,52 @@
 </head>
 
 <body onload="init()">
+        <style>
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #fac706;
+            text-decoration: none;
+        }
+
+        #review_table {
+            border: 1px solid #999999;
+            width: 600;
+            padding: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin: 0 0 20 0;
+        }
+
+        #review_table td {
+            padding: 3px;
+        }
+
+
+        .review_text {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .rtb {
+            border: 1px solid #999999;
+            text-align: center;
+        }
+
+        .star_select {
+            width: 70px;
+            padding: inherit;
+        }
+
+    </style>
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
@@ -48,7 +94,41 @@
                 </tr>
             </table>
         </section>
+        <?php
+        $db = mysqli_connect('localhost', 'root', 'king', 'first');
+                
+        if (mysqli_connect_errno()) {
+            echo '<p>Error: Could not connect to database.<br/>
+            Please try again later.</p>';
+            exit;
+        }
+        $userID=$_SESSION['user_id'];
+        $query="select * from webtoon_review where user_id='$userID'";
+                
+        $result=$db->query($query);
+                
 
+    while($row=$result->fetch_array()){
+        $sql="select * from webtoon_info where webtoon_id='$row[webtoon_id]'";
+        $result2=$db->query($sql);
+        $row2=$result2->fetch_array();
+      echo "<table id=review_table><tr>";
+      echo "<td class=rtb width=100>$row2[webtoon_name]</td>";
+      echo "<td width=120 align=center><font color=#fac706>$row[rate]점</font></td>";    
+      echo "<td width=250 align=center>$row[review_date]</td>";
+        if(isset($_SESSION['user_id'])){
+            if(strcmp($_SESSION['user_id'],$row['user_id'])==0){
+                echo "<td class=rtb width=100><a href='review_delete.php?review_id=$row[review_id]'>삭제</a></td></tr>";
+            }
+        }
+      echo "<tr><td colspan=5>$row[review_content]</td>";
+      echo "</tr></table>";
+    }
+
+                
+        $db->close();
+
+        ?>
     </div>
     <script>
         
