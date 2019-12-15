@@ -103,7 +103,7 @@
             exit;
         }
         $userID=$_SESSION['user_id'];
-        $query="select * from webtoon_review where user_id='$userID'";
+        $query="select * from webtoon_review where user_id='$userID' order by review_date desc";
                 
         $result=$db->query($query);
                 

@@ -55,33 +55,40 @@
 
         <div id="Platform" class="content">
             <ul id=tab_list>
-                <li><a href="platform.php?query=naver">네이버</a></li>
-                <li><a href="platform.php?query=daum">다음</a></li>
-                <li><a href="platform.php?query=lezhin">레진코믹스</a></li>
+                <li><a href="platform.php?query=네이버">네이버</a></li>
+                <li><a href="platform.php?query=다음">다음</a></li>
+                <li><a href="platform.php?query=레진코믹스">레진코믹스</a></li>
             </ul>
         </div>
 
         <div id="Age" class="content">
             <ul id=tab_list>
-                <li><a href="platform.php?query=10">10대</a></li>
-                <li><a href="platform.php?query=20">20대</a></li>
-                <li><a href="platform.php?query=30">30대</a></li>
+                <li><a href="age.php?query=10">10대</a></li>
+                <li><a href="age.php?query=20">20대</a></li>
+                <li><a href="age.php?query=30">30대</a></li>
             </ul>
         </div>
         <!--------------------------------------------------------------->
         <section>
             <h1> </h1>
             <?php
-                       $platform = $_GET["query"];
-	echo $platform;
+                       $age = $_GET["query"];
+	echo $age;
             @$db = mysqli_connect('localhost', 'root', 'king', 'first');
     if (mysqli_connect_errno()) {
        echo "<p>Error: Could not connect to database.<br/>
              Please try again later.</p>";
        exit;
     }
-        
-        $query = "select * from webtoon_info where platform like '%$platform%'";
+        if($age==10){
+        $query = "select * from webtoon_info where age<20;";
+        }
+            else if($age==20){
+                $query = "select * from webtoon_info where age<30 and age>=20;";
+            }
+            else{
+                $query = "select * from webtoon_info where age>=30;";
+            }
         $result=mysqli_query($db, $query);
         $row=mysqli_fetch_array($result);
             $resultArr=array();
@@ -121,7 +128,7 @@
 
     <script>
         function init() {
-            document.getElementById("platform").onclick();
+            document.getElementById("age").onclick();
         }
 
         function openMenu(target, seltab) {
