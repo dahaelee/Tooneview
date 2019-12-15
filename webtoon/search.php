@@ -10,9 +10,8 @@
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
-            <div id="mypage">               <?php
-                
-                
+            <div id="mypage">               
+                <?php
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
             }
@@ -76,14 +75,18 @@
     <table>
         <tr>
             <td>
-                    <select name="searchType" id="searchType"  />
-          <option value="title">제목</option>
-          <option value="artist">작가</option>
+                <select name="searchType" id="searchType"  />
+                <option value="title">제목</option>
+                <option value="artist">작가</option>
             </td>
             <td>
-                <input type="text" id="searchWord" placeholder="검색어를 입력하세요." name="searchWord" maxlength="30" size="30" />
-                     <input type="submit" value="검색" />
+                &nbsp<input type="text" id="searchWord" placeholder="검색어를 입력하세요." name="searchWord" maxlength="30" size="30" />
             </td>
+            </tr>
+        <tr>
+            <th colspan="2">
+                <button class=btn type="submit" >검색</button>
+            </th>
         </tr>
                     </table>                     
 

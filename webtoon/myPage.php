@@ -11,8 +11,25 @@
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
+            <div id="mypage">
+                <?php
+            if(!isset($_SESSION['user_id']) ) {
+                echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
+            }
+                else{
+                    echo "<table>
+                <tr>
+                    <td>
+                        <a href='logout.php'>로그아웃</a>
+                    </td>
+                </tr>
+                
+                </table> ";
+                }
+            ?>
+            </div>
         </header>
-
+        
 
         <section id="main_section">
             <table id=mypageTable>
