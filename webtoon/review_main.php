@@ -113,10 +113,9 @@
 
         <div id="Platform" class="content">
             <ul id=tab_list>
-                <li><a href="platform_naver.html">네이버</a></li>
-                <li><a href="platform_daum.html">다음</a></li>
-                <li><a href="platform_lezhin.html">레진코믹스</a></li>
-                <li><a href="platform_bom.html">봄툰</a></li>
+                <li><a href="platform.php?query=네이버">네이버</a></li>
+                <li><a href="platform.php?query=다음">다음</a></li>
+                <li><a href="platform.php?query=레진코믹스">레진코믹스</a></li>
             </ul>
         </div>
 
