@@ -58,9 +58,10 @@
     </style>
 
     <?php
+    $webtoon_id = $_GET["toonID"];
    $conn = mysqli_connect("localhost","root","king");
    $db = mysqli_select_db($conn,"first");   
-   $sql = "SELECT * FROM webtoon_review ORDER BY review_id DESC";
+   $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY review_id DESC";
    $result = $conn->query($sql) or die($this->_connect->error);
     ?>
 
@@ -130,7 +131,6 @@
         <section id="main_section">
  <h1>
 		<?php
-		$webtoon_id = $_GET["toonID"];
 
 @$db = mysqli_connect('localhost', 'root', 'king', 'first');
     if (mysqli_connect_errno()) {
@@ -198,10 +198,10 @@ $web_info=mysqli_query($db, $query);
         $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[1]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(오름차순)
         $ord_key = array_search($ord,$ord_array); // 해당 키 찾기 (0, 1)
         if($ord_key==1){
-            $sql = "SELECT * FROM webtoon_review ORDER BY rate DESC";
+            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY rate DESC";
             $result = $conn->query($sql) or die($this->_connect->error);}
         else{
-            $sql = "SELECT * FROM webtoon_review ORDER BY rate ASC";
+            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY rate ASC";
             $result = $conn->query($sql) or die($this->_connect->error);}
         $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
         ?><a href="?ord=<?php echo $ord_rev; ?>">별점순<?php echo $ord_arrow[$ord_key]; ?></a>
@@ -212,10 +212,10 @@ $web_info=mysqli_query($db, $query);
         $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[0]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(내림차순)
         $ord_key = array_search($ord,$ord_array); // 해당 키 찾기 (0, 1)
         if($ord_key==0){
-            $sql = "SELECT * FROM webtoon_review ORDER BY review_id DESC";
+            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY review_id DESC";
             $result = $conn->query($sql) or die($this->_connect->error);}
         else{
-            $sql = "SELECT * FROM webtoon_review ORDER BY review_id ASC";
+            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY review_id ASC";
             $result = $conn->query($sql) or die($this->_connect->error);}
         $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
         ?><a href="?ord=<?php echo $ord_rev; ?>">등록일순<?php echo $ord_arrow[$ord_key]; ?></a>
