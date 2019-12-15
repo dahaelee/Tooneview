@@ -10,6 +10,6 @@ echo $webtoon_id;
     $conn->query($sql);
     echo "<script>alert('글이 등록되었습니다.');";
 
-    echo "location.href='review_main.php';</script>";
+    echo "location.href='review_main.php?toonID=$webtoon_id';</script>";
 
      ?>

@@ -42,10 +42,10 @@ conn = pymysql.connect(host='localhost',user='root', password ='king')
 cursor = conn.cursor()
 sql="use first"
 cursor.execute(sql)
-sql = "drop table webtoon_info;"
-cursor.execute(sql)
-sql = "create table webtoon_info( webtoon_id INT NOT NULL auto_increment, webtoon_name CHAR(100), artist CHAR(30), platform CHAR(30), genre CHAR(50), url VARCHAR(255), description VARCHAR(255), img_src VARCHAR(255), age INT, primary key(webtoon_id) );"
-cursor.execute(sql)
+#sql = "drop table webtoon_info;"
+#cursor.execute(sql)
+#sql = "create table webtoon_info( webtoon_id INT NOT NULL, webtoon_name CHAR(100), artist CHAR(30), platform CHAR(30), genre CHAR(50), url VARCHAR(255), description VARCHAR(255), img_src VARCHAR(255), age INT, primary key(webtoon_id) );"
+#cursor.execute(sql)
 url = 'https://comic.naver.com/webtoon/creation.nhn'
 response= requests.get(url)
 source = response.text

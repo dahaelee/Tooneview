@@ -63,9 +63,9 @@
 
         <div id="Age" class="content">
             <ul id=tab_list>
-                <li><a href="age_10.html">10대</a></li>
-                <li><a href="age_20.html">20대</a></li>
-                <li><a href="age_30.html">30대</a></li>
+                <li><a href="age.php?query=10">10대</a></li>
+                <li><a href="age.php?query=20">20대</a></li>
+                <li><a href="age.php?query=30">30대</a></li>
             </ul>
         </div>
         <!--------------------------------------------------------------->

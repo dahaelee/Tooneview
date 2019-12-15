@@ -62,9 +62,9 @@
 
         <div id="Age" class="content">
             <ul id=tab_list>
-                <li><a href="age_10.html">10대</a></li>
-                <li><a href="age_20.html">20대</a></li>
-                <li><a href="age_30.html">30대</a></li>
+                <li><a href="age.php?query=10">10대</a></li>
+                <li><a href="age.php?query=20">20대</a></li>
+                <li><a href="age.php?query=30">30대</a></li>
             </ul>
         </div>
 
@@ -97,124 +97,50 @@
             </a>
         </section>
 
-        <table>
-            <tr>
-                <th>
-                    <section id="main_aside">
-                        <h1> TODAY 순위 </h1>
-                        <table class="rank_table">
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">1</td>
-                                <td class="pic">그림넣기</td>
-                                <td class="title">제목넣기</td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">2</td>
-                                <td class="pic">그림넣기</td>
-                                <td class="title">제목넣기</td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">3</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">4</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">5</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">6</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">7</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">8</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">9</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">10</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                        </table>
-                    </section>
-                </th>
-                <th>
-                    <section id="main_aside">
-                        <h1> WEEKLY 순위 </h1>
-                        <table class="rank_table">
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">1</td>
-                                <td class="pic">그림넣기</td>
-                                <td class="title">제목넣기</td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">2</td>
-                                <td class="pic">그림넣기</td>
-                                <td class="title">제목넣기</td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">3</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">4</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">5</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">6</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">7</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">8</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">9</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                            <tr onClick="location.href='리뷰링크넣기'" style="cursor:pointer;">
-                                <td class="ranking">10</td>
-                                <td class="pic"></td>
-                                <td class="title"></td>
-                            </tr>
-                        </table>
-                    </section>
-                </th>
-            </tr>
-        </table>
+   <?php
+   $conn = mysqli_connect("localhost","root","king");
+   $db = mysqli_select_db($conn,"first");
+    
+      echo "<table><tr>";
+        
+      $sql = "select table1.webtoon_id as webtoon_id, table1.img_src as thumbnail, table1.webtoon_name as title from (select * from webtoon_info) as table1 inner join (select webtoon_id, AVG(rate) as avg_rate from webtoon_review where Date(review_date) =curdate() group by webtoon_id ) as table2 on table1.webtoon_id = table2.webtoon_id order by table2.avg_rate desc;";
+      $result = $conn->query($sql) or die($this->_connect->error);    
+    
+      echo "<th><section id='main_aside'><h1> TODAY 순위 </h1><table class='rank_table'>";
+      $today_count=1;
+      while($row=$result->fetch_array()){ 
+      if($today_count<=10){
+      $url = "location.href='review_main.php?toonID=$row[webtoon_id]'";
+      echo "<tr onClick=$url style='cursor:pointer;'>
+            <td width='30'><font color=#fac706>$today_count</font></td>
+            <td><img src=$row[thumbnail] width='50' height='50'></td>
+            <td>$row[title]</td>
+            </tr></a>";
+      $today_count=$today_count+1;
+      }
+      }
+      echo"</table></section></th>";
+        
+        $sql = "select table1.webtoon_id as webtoon_id, table1.img_src as thumbnail, table1.webtoon_name as title from (select * from webtoon_info) as table1 inner join (select webtoon_id, AVG(rate) as avg_rate from webtoon_review where Date(review_date) =curdate() group by webtoon_id ) as table2 on table1.webtoon_id = table2.webtoon_id order by table2.avg_rate desc;";
+        $result = $conn->query($sql) or die($this->_connect->error);
+        
+      echo "<th><section id='main_aside'><h1> WEEKLY 순위 </h1><table class='rank_table'>";
+      $weekly_count=1;
+      while($row=$result->fetch_array()){ 
+      if($weekly_count<=10){
+      $url = "location.href='review_main.php?toonID=$row[webtoon_id]'";
+      echo "<tr onClick=$url style='cursor:pointer;'>
+            <td width='30'><font color=#fac706>$weekly_count</font></td>
+            <td><img src=$row[thumbnail] width='50' height='50'></td>
+            <td>$row[title]</td>
+            </tr>";
+      $weekly_count=$weekly_count+1;
+      }
+      }
+      echo"</table></section></th>";
+        
+      echo"</tr></table>";
+?>
 
         <footer id="main_footer"> 통합형 리뷰 포럼 웹 어플리케이션, tooneview </footer>
     </div>
