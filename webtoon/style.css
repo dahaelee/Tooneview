@@ -148,8 +148,9 @@ a:hover { color: black; text-decoration: none;}
     vertical-align: middle;
 }
 
-#login{
+.login{
     text-align: center; 
+    width: 230px; margin: 20px;
     color:#fac706;
     font: bold 20px verdana, sans-serif
 }
@@ -175,7 +176,7 @@ a:hover { color: black; text-decoration: none;}
 
 #login_content{
     display:inline-block;
-    width:50%;
+    width:40%;
     height:90%;
 }
 
@@ -237,4 +238,20 @@ input{
     border-left:none;
     border-top:none;    
     border-bottom:none;
+}
+.btn {/* 플롯 중요 - 플롯 요소는 문서상 부유(흐르지만)하지만 다음 요소에 영향을 미치게 된다. */
+    width: 40%; /* 부모 400px 영역 안의 100% 사용 */
+    text-align: center;
+    margin-top: 10px;
+    border: none;
+    background-color: #fac706;
+    color:white;
+    font-size:15px;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-radius : 4px;
+}
+
+.btn:hover{
+    background-color: #fcdd6a;
 }

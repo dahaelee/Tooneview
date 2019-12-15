@@ -11,10 +11,20 @@
 <body onload="init()">
 
     <style>
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
 
-a:link { color: black; text-decoration: none;}
-a:visited { color: black; text-decoration: none;}
-a:hover { color: #fac706; text-decoration: none;}
+        a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #fac706;
+            text-decoration: none;
+        }
 
         #review_table {
             border: 1px solid #999999;
@@ -37,26 +47,47 @@ a:hover { color: #fac706; text-decoration: none;}
 
         .rtb {
             border: 1px solid #999999;
-	text-align: center;
+            text-align: center;
         }
 
         .star_select {
             width: 70px;
             padding: inherit;
         }
+
     </style>
 
     <?php
-	$conn = mysqli_connect("localhost","root","king");
-	$db = mysqli_select_db($conn,"first");	
-	$sql = "SELECT * FROM webtoon_review ORDER BY webtoon_id DESC";
-	$result = $conn->query($sql) or die($this->_connect->error);
+    $webtoon_id = $_GET["toonID"];
+   $conn = mysqli_connect("localhost","root","king");
+   $db = mysqli_select_db($conn,"first");   
+   $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY review_id DESC";
+   $result = $conn->query($sql) or die($this->_connect->error);
     ?>
 
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
-            <div id="mypage"><a href="login.html"><img src="profile.png" width="40" height="40"></a></div>
+            <div id="mypage">
+                <?php
+            if(!isset($_SESSION['user_id']) ) {
+                echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
+            }
+                else{
+                    echo "<table>
+                <tr>
+                    <td>
+                        <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
+                    </td>
+                    <td>
+                        <a href='logout.php'>로그아웃</a>
+                    </td>
+                </tr>
+                
+                </table> ";
+                }
+            ?>
+            </div>
         </header>
 
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
@@ -66,25 +97,25 @@ a:hover { color: #fac706; text-decoration: none;}
 
         <div id="Genre" class="content">
             <ul id=tab_list>
-                <li><a href="genre_ilsang.php">일상</a></li>
-                <li><a href="genre_gag.html">개그</a></li>
-                <li><a href="genre_fantasy.html">판타지</a></li>
-                <li><a href="genre_action.html">액션</a></li>
-                <li><a href="genre_drama.html">드라마</a></li>
-                <li><a href="genre_soonjeong.html">순정</a></li>
-                <li><a href="genre_gamseong.html">감성</a></li>
-                <li><a href="genre_thriller.html">스릴러</a></li>
-                <li><a href="genre_sidae.html">시대극</a></li>
-                <li><a href="genre_sports.html">스포츠</a></li>
+
+                <li><a href="genre.php?query=일상">일상</a></li>
+                <li><a href="genre.php?query=개그">개그</a></li>
+                <li><a href="genre.php?query=판타지">판타지</a></li>
+                <li><a href="genre.php?query=액션">액션</a></li>
+                <li><a href="genre.php?query=드라마">드라마</a></li>
+                <li><a href="genre.php?query=순정">순정</a></li>
+                <li><a href="genre.php?query=감성">감성</a></li>
+                <li><a href="genre.php?query=스릴러">스릴러</a></li>
+                <li><a href="genre.php?query=시대극">시대극</a></li>
+                <li><a href="genre.php?query=스포츠">스포츠</a></li>
             </ul>
         </div>
 
         <div id="Platform" class="content">
             <ul id=tab_list>
-                <li><a href="platform_naver.html">네이버</a></li>
-                <li><a href="platform_daum.html">다음</a></li>
-                <li><a href="platform_lezhin.html">레진코믹스</a></li>
-                <li><a href="platform_bom.html">봄툰</a></li>
+                <li><a href="platform.php?query=네이버">네이버</a></li>
+                <li><a href="platform.php?query=다음">다음</a></li>
+                <li><a href="platform.php?query=레진코믹스">레진코믹스</a></li>
             </ul>
         </div>
 
@@ -97,44 +128,107 @@ a:hover { color: #fac706; text-decoration: none;}
         </div>
 
         <section id="main_section">
-            <h1>웹툰 정보</h1>
+ <h1>
+		<?php
+
+@$db = mysqli_connect('localhost', 'root', 'king', 'first');
+    if (mysqli_connect_errno()) {
+       echo "<p>Error: Could not connect to database.<br/>
+             Please try again later.</p>";
+       exit;
+    }
+        
+        $query = "select * from webtoon_info where webtoon_id = $webtoon_id";
+$web_info=mysqli_query($db, $query);
+        $row=mysqli_fetch_array($web_info);
+            
+	$name = $row["webtoon_name"];
+	$img_src = $row["img_src"];
+	$artist = $row["artist"];
+	$description = $row["description"];
+	$platform = $row["platform"];
+	echo "<img src = $img_src>";
+	echo "$name<br>";
+	echo "<p>$description</p>";
+
+
+
+?>
+</h1>
         </section>
 
-        <form action="review_insert.php" method="post">
-            <table id="review_table">
+        <?php
+        $nickname=$_SESSION["nickname"];
+        if(isset($_SESSION["user_id"])) { 
+            echo"
+        <form action='review_insert.php?toonID=$webtoon_id' method='post' >
+            <table id='review_table'>
                 <tr>
-                    <td class="rtb" width="80" align=center>닉네임</td>
-                    <td width="100" align=center><?php echo $_SESSION['user_id'] ?></td>
-                    <td class="rtb" width="80" align=center>별점</td>
-                    <td width="100" align=center>
-                        <select class="star_select" name="starpoint">
-                            <option value="5">5점</option>
-                            <option value="4">4점</option>
-                            <option value="3">3점</option>
-                            <option value="2">2점</option>
-                            <option value="1">1점</option>
+                    <td class='rtb' width='80' align=center>닉네임</td>
+                    <td width='100' align=center> $nickname </td>
+                    <td class='rtb' width='80' align=center>별점</td>
+                    <td width='100' align=center>
+                        <select class='star_select' name='starpoint'>
+                            <option value='5'>5점</option>
+                            <option value='4'>4점</option>
+                            <option value='3'>3점</option>
+                            <option value='2'>2점</option>
+                            <option value='1'>1점</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td colspan=4>
-                        <textarea class="review_text" placeholder="내용을 입력하세요" name="content" rows="8" cols="85"></textarea>
+                        <textarea class='review_text' placeholder='내용을 입력하세요' name='content' rows='8' cols='85'></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan=4 align=right><input type="submit" value="등록"></td>
-                </tr>
+                    <td colspan=4 align=right><input type='submit' value='등록'></td>
+                </tr>    
             </table>
-        </form>
-        </br>
+        </form>";}
+        
+        else echo "<table id='review_table'><tr><td><font color=#fac706>리뷰를 작성하시려면 로그인하세요.</font></tr></td></table>";
+        ?>
+
+        <?php       
+        $ord_array = array('desc','asc'); 
+        $ord_arrow = array('▼','▲'); 
+        $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[1]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(오름차순)
+        $ord_key = array_search($ord,$ord_array); // 해당 키 찾기 (0, 1)
+        if($ord_key==1){
+            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY rate DESC";
+            $result = $conn->query($sql) or die($this->_connect->error);}
+        else{
+            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY rate ASC";
+            $result = $conn->query($sql) or die($this->_connect->error);}
+        $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
+        ?><a href="?ord=<?php echo $ord_rev; ?>">별점순<?php echo $ord_arrow[$ord_key]; ?></a>
+       
+        <?php       
+        $ord_array = array('desc','asc'); 
+        $ord_arrow = array('▼','▲'); 
+        $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[0]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(내림차순)
+        $ord_key = array_search($ord,$ord_array); // 해당 키 찾기 (0, 1)
+        if($ord_key==0){
+            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY review_id DESC";
+            $result = $conn->query($sql) or die($this->_connect->error);}
+        else{
+            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY review_id ASC";
+            $result = $conn->query($sql) or die($this->_connect->error);}
+        $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
+        ?><a href="?ord=<?php echo $ord_rev; ?>">등록일순<?php echo $ord_arrow[$ord_key]; ?></a>
         <?php
     while($row=$result->fetch_array()){
       echo "<table id=review_table><tr>";
-      echo "<td class=rtb width=80>No. $row[webtoon_id]</td>";
-      echo "<td width=200 align=center>$row[user_name]</td>";
-      echo "<td width=300 align=center>$row[review_date]</td>";
-      echo "<td class=rtb width=50><a href='modifycheck.php?id=$row[webtoon_id]'>수정</a></td>";
-      echo "<td class=rtb width=50><a href='delete.php?id=$row[webtoon_id]'>삭제</a></td></tr>";
+      echo "<td class=rtb width=100>$row[user_name]</td>";
+      echo "<td width=120 align=center><font color=#fac706>$row[rate]점</font></td>";    
+      echo "<td width=250 align=center>$row[review_date]</td>";
+        if(isset($_SESSION['user_id'])){
+            if(strcmp($_SESSION['user_id'],$row['user_id'])==0){
+                echo "<td class=rtb width=100><a href='review_delete.php?review_id=$row[review_id]'>삭제</a></td></tr>";
+            }
+        }
       echo "<tr><td colspan=5>$row[review_content]</td>";
       echo "</tr></table>";
     }

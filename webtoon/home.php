@@ -10,11 +10,8 @@
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
-            
             <div id="mypage">
                 <?php
-                
-                
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
             }
@@ -38,29 +35,28 @@
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
         <button id="platform" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
         <button id="age" class="tab" onclick="openMenu('Age', this)">연령대</button>
-        <button class="tab"><a href="search.html"></a><img src="search.png" width="22.5" height="22.5"></button>
+        <a href="search.php"><button class="tab"><img src="search.png" width="22.5" height="22.5"></button></a>
 
         <div id="Genre" class="content">
             <ul id=tab_list>
-                <li><a href="genre_ilsang.php">일상</a></li>
-                <li><a href="genre_gag.html">개그</a></li>
-                <li><a href="genre_fantasy.html">판타지</a></li>
-                <li><a href="genre_action.html">액션</a></li>
-                <li><a href="genre_drama.html">드라마</a></li>
-                <li><a href="genre_soonjeong.html">순정</a></li>
-                <li><a href="genre_gamseong.html">감성</a></li>
-                <li><a href="genre_thriller.html">스릴러</a></li>
-                <li><a href="genre_sidae.html">시대극</a></li>
-                <li><a href="genre_sports.html">스포츠</a></li>
+                <li><a href="genre.php?query=일상">일상</a></li>
+                <li><a href="genre.php?query=개그">개그</a></li>
+                <li><a href="genre.php?query=판타지">판타지</a></li>
+                <li><a href="genre.php?query=액션">액션</a></li>
+                <li><a href="genre.php?query=드라마">드라마</a></li>
+                <li><a href="genre.php?query=순정">순정</a></li>
+                <li><a href="genre.php?query=감성">감성</a></li>
+                <li><a href="genre.php?query=스릴러">스릴러</a></li>
+                <li><a href="genre.php?query=시대극">시대극</a></li>
+                <li><a href="genre.php?query=스포츠">스포츠</a></li>
             </ul>
         </div>
 
         <div id="Platform" class="content">
             <ul id=tab_list>
-                <li><a href="platform_naver.html">네이버</a></li>
-                <li><a href="platform_daum.html">다음</a></li>
-                <li><a href="platform_lezhin.html">레진코믹스</a></li>
-                <li><a href="platform_bom.html">봄툰</a></li>
+                <li><a href="platform.php?query=네이버">네이버</a></li>
+                <li><a href="platform.php?query=다음">다음</a></li>
+                <li><a href="platform.php?query=레진코믹스">레진코믹스</a></li>
             </ul>
         </div>
 
@@ -73,7 +69,7 @@
         </div>
 
         <section id="main_section">
-            <h1> BEST 리뷰 </h1>
+            <h1> 최근에 리뷰된 웹툰 </h1>
             <a class="article" href="review_main.php">
                 <p>
                     리뷰내용
