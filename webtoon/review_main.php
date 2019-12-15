@@ -162,7 +162,7 @@ $web_info=mysqli_query($db, $query);
         $nickname=$_SESSION["nickname"];
         if(isset($_SESSION["user_id"])) { 
             echo"
-        <form action='review_insert.php' method='post' >
+        <form action='review_insert.php?toonID=$webtoon_id' method='post' >
             <table id='review_table'>
                 <tr>
                     <td class='rtb' width='80' align=center>닉네임</td>
