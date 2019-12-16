@@ -166,7 +166,7 @@ $result = $conn->query($sql) or die($this->_connect->error);
         
         echo"<table>";
         echo"<tr><td><section id='main_section'>
-        <h1> 웹툰 소개 </h1>   
+        <h1> 추천 웹툰 </h1>   
 
       <div class='banner'>
          <ul>
