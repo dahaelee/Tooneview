@@ -1,5 +1,5 @@
 ﻿<html>
-
+<?php session_start(); ?>
 <head>
     <meta charset="utf-8">
     <title> home </title>
@@ -39,9 +39,9 @@
             }
                 else{
                     echo "<table>
-                <tr>
+             <tr>
                     <td>
-                        <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
+                        <a href='mypage.php?hostID=$_SESSION[user_id]'><img src='profile.png' width='40' height='40'></a>
                     </td>
                     <td>
                         <a href='logout.php'><img src='logout.png' width='40' height='40'></a>
