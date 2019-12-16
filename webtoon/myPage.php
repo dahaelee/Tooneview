@@ -66,7 +66,10 @@
                     echo "<table>
                 <tr>
                     <td>
-                        <a href='logout.php'>로그아웃</a>
+                        <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
+                    </td>
+                    <td>
+                        <a href='logout.php'><img src='logout.png' width='40' height='40'></a>
                     </td>
                 </tr>
                 

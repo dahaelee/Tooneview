@@ -93,7 +93,7 @@
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
         <button id="platform" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
         <button id="age" class="tab" onclick="openMenu('Age', this)">연령대</button>
-        <button class="tab"><a href="search.html"></a><img src="search.png" width="22.5" height="22.5"></button>
+        <button class="tab"><a href="search.html"></a><img src="search.png" width="23" height="23"></button>
 
         <div id="Genre" class="content">
             <ul id=tab_list>
@@ -128,7 +128,7 @@
         </div>
 
         <section id="main_section">
- <h1>
+
 		<?php
 
 @$db = mysqli_connect('localhost', 'root', 'king', 'first');
@@ -148,18 +148,18 @@ $web_info=mysqli_query($db, $query);
 	$description = $row["description"];
 	$platform = $row["platform"];
 	echo "<img src = $img_src>";
-	echo "$name<br>";
-	echo "<p>$description</p>";
+	echo "<h1><br><font size='6'>$name</font><br></h1>";
+	echo "<p text align='center'><b><font size='4'>$description</font></b></p>";
 
 
 
 ?>
-</h1>
+
         </section>
 
         <?php
-        $nickname=$_SESSION["nickname"];
         if(isset($_SESSION["user_id"])) { 
+            $nickname=$_SESSION["nickname"];
             echo"
         <form action='review_insert.php?toonID=$webtoon_id' method='post' >
             <table id='review_table'>

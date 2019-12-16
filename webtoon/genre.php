@@ -22,7 +22,7 @@
                         <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
                     </td>
                     <td>
-                        <a href='logout.php'>로그아웃</a>
+                        <a href='logout.php'><img src='logout.png' width='40' height='40'></a>
                     </td>
                 </tr>
                 
@@ -35,7 +35,7 @@
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
         <button id="platform" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
         <button id="age" class="tab" onclick="openMenu('Age', this)">연령대</button>
-        <a href="search.php"><button class="tab"><img src="search.png" width="22.5" height="22.5"></button></a>
+        <a href="search.php"><button class="tab"><img src="search.png" width="23" height="23"></button></a>
 
         <div id="Genre" class="content">
             <ul id=tab_list>
@@ -55,9 +55,9 @@
 
         <div id="Platform" class="content">
             <ul id=tab_list>
-                <li><a href="platform.php?query=네이버">네이버</a></li>
-                <li><a href="platform.php?query=다음">다음</a></li>
-                <li><a href="platform.php?query=레진코믹스">레진코믹스</a></li>
+                <li><a href="platform.php?query=naver">네이버</a></li>
+                <li><a href="platform.php?query=daum">다음</a></li>
+                <li><a href="platform.php?query=lezhin">레진코믹스</a></li>
             </ul>
         </div>
 
@@ -73,7 +73,6 @@
             <h1> </h1>
             <?php
                        $genre = $_GET["query"];
-	echo $genre;
 @$db = mysqli_connect('localhost', 'root', 'king', 'first');
     if (mysqli_connect_errno()) {
        echo "<p>Error: Could not connect to database.<br/>
@@ -91,24 +90,26 @@
             
         $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
-	echo $i;
-	echo count($resultArr);
+            echo"<table>
+                <tr width=100><td><h1>$genre</h1></td><td>$i</td></tr>
+            </table>";
+	//echo count($resultArr);
+            echo"<br>";
             for($count=0;$count<count($resultArr);$count++){
                 $resulta=$resultArr[$count];
                 $name= $resulta["webtoon_name"];
    $img_src = $resulta["img_src"];
    $artist = $resulta["artist"];
                 $webtoon_id=$resulta["webtoon_id"];
-                echo " <a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>
-                <p>
-      <img src=$img_src width = '100' height='100'>
-                   $name
-      <p style='text-align:right'>
-      $artist
-      </p>
-                </p>
-            </a>";    
-                 echo "<br/>";  
+                
+                echo "<a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>";
+                
+                echo "<table><tr>
+                <td width=100></td>
+                <td><img src=$img_src width = '110' height='110'></td>
+                <td width=500 align='center'><h1>$name</h1></td>
+                <td><font color=#fac706><h1>$artist</h1></font></td>
+                </tr></table></a>";
             }            
 
 
