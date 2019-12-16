@@ -177,9 +177,14 @@
         $sql="select * from webtoon_info where webtoon_id='$row[webtoon_id]'";
         $result2=$db->query($sql);
         $row2=$result2->fetch_array();
+        $rate_percentage=$row['rate']*20;
       echo "<table id=review_table><tr>";
-      echo "<td class=rtb width=100>$row2[webtoon_name]</td>";
-      echo "<td width=120 align=center><font color=#ff7a1b>$row[rate]점</font></td>";    
+      echo "<td class=rtb width=250>$row2[webtoon_name]</td>";
+      echo "<td width=10></td><td><div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>
+	       <p style='WIDTH:$rate_percentage%; PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;	HEIGHT: 18px;'>
+	       </p>
+	       </div>
+      </td>";    
       echo "<td width=250 align=center>$row[review_date]</td>";
         if(isset($_SESSION['user_id'])){
             if(strcmp($_SESSION['user_id'],$row['user_id'])==0){

@@ -92,11 +92,12 @@
         </div>
         <!--------------------------------------------------------------->
         <section>
-                    <section>
+
             <?php
                 $genre = $_GET["query"];
                 echo "<form action='genre_search.php?query=$genre' method='post'>";
-            ?>         
+            ?>   
+<section id='main_section'>                        
     <table>
         <tr>
             <td>
@@ -113,23 +114,35 @@
             
             </tr>
                     </table>                     
-
+    </section><br><br><br><br><br>    
          <?php
             echo "</form>";
             ?>
+        <?php       
+        $ord_array = array('desc','asc'); 
+        $ord_arrow = array('▼','▲'); 
+        $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[0]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(내림차순)
+        $ord_key = array_search($ord,$ord_array); // 해당 키 찾기 (0, 1)
+        if($ord_key==0){
+            $sql = "select table1.webtoon_name as webtoon_name, table1.artist as artist, table1.webtoon_id as webtoon_id, table1.img_src as img_src from (select * from webtoon_info where genre like '%$genre%') as table1 left join (select webtoon_id, AVG(rate) as avg_rate from webtoon_review group by webtoon_id ) as table2 on table1.webtoon_id = table2.webtoon_id order by table2.avg_rate desc;";
+        }
+        else{
+            $sql = "select table1.webtoon_name as webtoon_name, table1.artist as artist, table1.webtoon_id as webtoon_id, table1.img_src as img_src from (select * from webtoon_info where genre like '%$genre%') as table1 left join (select webtoon_id, AVG(rate) as avg_rate from webtoon_review group by webtoon_id ) as table2 on table1.webtoon_id = table2.webtoon_id order by table2.avg_rate asc;";
+        }
+        $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
+        $url="genre.php?query=$genre&ord=$ord_rev";
+        echo"<a href=$url>평균별점순"; echo $ord_arrow[$ord_key]; echo"</a>"?>
                         
-            <h1> </h1>
             <?php
-                       $genre = $_GET["query"];
-@$db = mysqli_connect('localhost', 'root', 'king', 'first');
-    if (mysqli_connect_errno()) {
-       echo "<p>Error: Could not connect to database.<br/>
-             Please try again later.</p>";
-       exit;
-    }
+            @$db = mysqli_connect('localhost', 'root', 'king', 'first');
+            if (mysqli_connect_errno()) {
+                echo "<p>Error: Could not connect to database.<br/>
+                Please try again later.</p>";
+                exit;
+                }
         
-        $query = "select * from webtoon_info where genre like '%$genre%'";
-        $result=mysqli_query($db, $query);
+            //$query = "select * from webtoon_info where genre like '%$genre%'";
+            $result=mysqli_query($db, $sql);
         $num = mysqli_num_rows($result);    //총 데이터 수
         
         $list = 10; //페이지 당 데이터 수
@@ -186,21 +199,21 @@
     </p>            
             <?php
             $s_point = ($page-1) * $list;
-            $query = "select * from webtoon_info where genre like '%$genre%' LIMIT $s_point,$list";
-        $result=mysqli_query($db, $query);
+            if($ord_key==0){
+            $sql = "select table1.webtoon_name as webtoon_name, table1.artist as artist, table1.webtoon_id as webtoon_id, table1.img_src as img_src from (select * from webtoon_info where genre like '%$genre%') as table1 left join (select webtoon_id, AVG(rate) as avg_rate from webtoon_review group by webtoon_id ) as table2 on table1.webtoon_id = table2.webtoon_id order by table2.avg_rate desc LIMIT $s_point,$list;";
+        }
+        else{
+            $sql = "select table1.webtoon_name as webtoon_name, table1.artist as artist, table1.webtoon_id as webtoon_id, table1.img_src as img_src from (select * from webtoon_info where genre like '%$genre%') as table1 left join (select webtoon_id, AVG(rate) as avg_rate from webtoon_review group by webtoon_id ) as table2 on table1.webtoon_id = table2.webtoon_id order by table2.avg_rate asc LIMIT $s_point,$list;";
+        }
+        $result=mysqli_query($db, $sql);
             $row=mysqli_fetch_array($result);
             $resultArr=array();
             while($r=mysqli_fetch_assoc($result)){
                 $resultArr[]=$r;
             }
             
-        $webtoon_name=$row['webtoon_name'];
+            $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
-            echo"<table>
-                <tr width=100><td><h1>$genre</h1></td><td>$i</td></tr>
-            </table>";
-	//echo count($resultArr);
-            echo"<br>";
             
             for($count=0;$count<count($resultArr);$count++){
                 $resulta=$resultArr[$count];

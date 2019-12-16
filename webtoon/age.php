@@ -185,10 +185,7 @@
             
         $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
-	            echo"<table>
-                <tr width=100><td><h1>$age</h1></td><td>$i</td></tr>
-            </table>";
-	//echo count($resultArr);
+
             echo"<br>";
            
                         

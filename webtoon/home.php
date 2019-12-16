@@ -172,8 +172,8 @@ $result = $conn->query($sql) or die($this->_connect->error);
          <ul>
             <li><a href='https://comic.naver.com/webtoon/list.nhn?titleId=183559&weekday=mon' ><img src='https://image-comic.pstatic.net/webtoon/183559/thumbnail/thumbnail_IMAG02_e3b5a7f9-76c2-48d5-b360-0994d7b017c0.jpg' width='400' height='180px'></a></li>
             <li><a href='https://comic.naver.com/webtoon/list.nhn?titleId=733074&weekday=mon' ><img src='https://image-comic.pstatic.net/webtoon/733074/thumbnail/thumbnail_IMAG02_30abfeef-270d-4000-8a43-155e93ace734.jpg' width='400' height='180px'></a></li>
-            <li><a href='https://comic.naver.com/webtoon/list.nhn?titleId=726212&weekday=mon' ><img src='https://image-comic.pstatic.net/webtoon/720121/thumbnail/thumbnail_IMAG02_e4083187-102b-44f7-8278-cac672c98c73.jpg' width='400' height='180px'></a></li>
-            <li><a href='https://comic.naver.com/webtoon/list.nhn?titleId=720121&weekday=mon' ><img src='https://image-comic.pstatic.net/webtoon/726212/thumbnail/thumbnail_IMAG02_ef80419b-7fec-40d5-923e-18b872dfb453.jpg' width='400' height='180px'></a></li>
+            <li><a href='https://comic.naver.com/webtoon/list.nhn?titleId=720121&weekday=mon'><img src='https://image-comic.pstatic.net/webtoon/720121/thumbnail/thumbnail_IMAG02_e4083187-102b-44f7-8278-cac672c98c73.jpg' width='400' height='180px'></a></li>
+            <li><a href='https://comic.naver.com/webtoon/list.nhn?titleId=726212&weekday=mon' ><img src='https://image-comic.pstatic.net/webtoon/726212/thumbnail/thumbnail_IMAG02_ef80419b-7fec-40d5-923e-18b872dfb453.jpg' width='400' height='180px'></a></li>
          </ul>
    </div></section></td></tr>";
         
@@ -228,7 +228,7 @@ $result = $conn->query($sql) or die($this->_connect->error);
       }
       echo"</table></section></th>";
         
-        $sql = "select table1.webtoon_id as webtoon_id, table1.img_src as thumbnail, table1.webtoon_name as title from (select * from webtoon_info) as table1 inner join (select webtoon_id, AVG(rate) as avg_rate from webtoon_review where Date(review_date) =curdate() group by webtoon_id ) as table2 on table1.webtoon_id = table2.webtoon_id order by table2.avg_rate desc;";
+        $sql = "select table1.webtoon_id as webtoon_id, table1.img_src as thumbnail, table1.webtoon_name as title from (select * from webtoon_info) as table1 inner join (select webtoon_id, AVG(rate) as avg_rate from webtoon_review where review_date > date_add(now(),interval -7 day) group by webtoon_id ) as table2 on table1.webtoon_id = table2.webtoon_id order by table2.avg_rate desc;";
         $result = $conn->query($sql) or die($this->_connect->error);
         
       echo "<th><section id='main_aside'><h1> WEEKLY 순위 </h1><table class='rank_table'>";
