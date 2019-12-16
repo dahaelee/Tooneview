@@ -174,7 +174,7 @@
             }
             
         }
-            if($page<$e_page){  //마지막 페이지면 다음으로 못가게
+            if($page<$pageNum){  //마지막 페이지면 다음으로 못가게
                 ?>
                 <a href="<?=$_SERVER['PHP_SELF']?>?query=<?=$platform?>&page=<?=$page+1?>">다음</a>
             <?php
