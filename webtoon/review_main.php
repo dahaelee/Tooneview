@@ -168,8 +168,9 @@ $web_info=mysqli_query($db, $query);
 	$artist = $row["artist"];
 	$description = $row["description"];
 	$platform = $row["platform"];
-	echo "<img src = $img_src style='margin-left: auto; margin-right: auto; display: block;'/>";
-	echo "<h1><br><font size='6'>$name</font><br></h1>";
+    $url = $row["url"];
+	echo "<a href=$url><img src = $img_src style='margin-left: auto; margin-right: auto; display: block;'/></a>";
+	echo "<h1><br><a href=$url><font size='6'>$name</font></a><br></h1>";
 	echo "<p text align='center'><b><font size='4'>$description</font></b></p>";
 
 
