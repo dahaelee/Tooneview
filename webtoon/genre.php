@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title> home </title>
-    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="style.css?after" type="text/css" />
 </head>
 
 <body onload="init()">
@@ -117,23 +117,38 @@
             </table>";
 	//echo count($resultArr);
             echo"<br>";
+            
             for($count=0;$count<count($resultArr);$count++){
                 $resulta=$resultArr[$count];
                 $name= $resulta["webtoon_name"];
-   $img_src = $resulta["img_src"];
-   $artist = $resulta["artist"];
+                $img_src = $resulta["img_src"];
+                $artist = $resulta["artist"];
                 $webtoon_id=$resulta["webtoon_id"];
+                
+                $query1 = "select AVG(rate) as rate from webtoon_review where webtoon_id ='$webtoon_id'" ;
+                $rate_info=mysqli_query($db, $query1);
+                $row=mysqli_fetch_array($rate_info);
+                $rate=$row['rate'];
+                $rate_percentage=$rate*20;
                 
                 echo "<a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>";
                 
                 echo "<table><tr>
-                <td width=100></td>
+                <td width=150></td>
                 <td><img src=$img_src width = '110' height='110'></td>
-                <td width=500 align='center'><h1>$name</h1></td>
-                <td><font color=#fac706><h1>$artist</h1></font></td>
+                <td width=60></td>
+                <td width=400 align='center'><h1>$name</h1></td>
+                <td width=400 align='center'><font color=#fac706><h1>$artist</h1></font></td>
+                <td width=30></td>
+                <td width=300>
+                <div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>
+	            <p style='WIDTH:$rate_percentage%; PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;	HEIGHT: 18px;'>
+	            </p>
+	            </div>
+                </td>
                 </tr></table></a>";
-            }            
-
+            }  
+                
 
      $db->close();
             ?>

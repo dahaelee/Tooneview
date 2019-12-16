@@ -220,7 +220,7 @@ $result = $conn->query($sql) or die($this->_connect->error);
       $url = "location.href='review_main.php?toonID=$row[webtoon_id]'";
       echo "<tr onClick=$url style='cursor:pointer;'>
             <td width='30'><font color=#fac706>$today_count</font></td>
-            <td><img src=$row[thumbnail] width='50' height='50'></td>
+            <td><img src=$row[thumbnail] width='57' height='57'></td>
             <td>$row[title]</td>
             </tr></a>";
       $today_count=$today_count+1;
@@ -238,7 +238,7 @@ $result = $conn->query($sql) or die($this->_connect->error);
       $url = "location.href='review_main.php?toonID=$row[webtoon_id]'";
       echo "<tr onClick=$url style='cursor:pointer;'>
             <td width='30'><font color=#fac706>$weekly_count</font></td>
-            <td><img src=$row[thumbnail] width='50' height='50'></td>
+            <td><img src=$row[thumbnail] width='57' height='57'></td>
             <td>$row[title]</td>
             </tr>";
       $weekly_count=$weekly_count+1;
