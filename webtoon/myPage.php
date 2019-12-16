@@ -58,6 +58,7 @@
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
             <div id="mypage">
+       
                 <?php
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
@@ -66,10 +67,7 @@
                     echo "<table>
                 <tr>
                     <td>
-                        <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
-                    </td>
-                    <td>
-                        <a href='logout.php'><img src='logout.png' width='40' height='40'></a>
+                        <a href='logout.php'>로그아웃</a>
                     </td>
                 </tr>
                 
@@ -88,11 +86,15 @@
                 </th>
                 <th width="200">
                      <?php
+                    $db = mysqli_connect('localhost', 'root', 'king', 'first');
+                    $hostID = $_GET["hostID"];
                     $document_root = $_SERVER['DOCUMENT_ROOT']; 
-                    echo 'id : '.$_SESSION['user_id']."<br>
-                    ".'닉네임 : '.$_SESSION['nickname']."<br>";
+                    echo 'id : '.$hostID.'<br>';
                         echo "게시물 3  팔로워 104";
-                    ?>
+                    if($_SESSION['user_id']!=$hostID){
+                    echo "<a href='follow-insert.php?hostID=$hostID'><button class=btn>팔로우</button></a>";
+                    }
+                        ?>
                 </th>
                 </tr>
             </table>
@@ -105,8 +107,44 @@
             Please try again later.</p>';
             exit;
         }
-        $userID=$_SESSION['user_id'];
-        $query="select * from webtoon_review where user_id='$userID' order by review_date desc";
+        $hostID = $_GET["hostID"];
+        //table 시작
+        echo "<table align='top'><tr><td>";
+        $query="select * from follow where followee_id='$hostID';";
+        $result=mysqli_query($db, $query);
+        if($result->num_rows==0){
+             echo "<table><tr><td class=rtb width='100'> 팔로잉 목록 </td></tr></table>";
+            echo "팔로워 목록이 없습니다.";
+        }
+        else{
+            echo "<table><tr>";
+            echo "<td class=rtb width='100'> 팔로워 목록 </td></tr>";
+            while($row=$result->fetch_array()){
+                echo "<tr><td>$row[follower_id]</td></tr>";
+            }
+            echo "</table>";
+        }
+        echo "</td>";
+        //////////////////팔로잉 목록
+        echo "<td>";
+        $query2="select * from follow where follower_id='$hostID';";
+        $result2=mysqli_query($db, $query2);
+        if($result2->num_rows==0){
+            echo "<table><tr><td class=rtb width='100'> 팔로잉 목록 </td></tr></table>";
+            echo "팔로잉 목록이 없습니다.";
+        }
+        else{
+            echo "<table><tr>";
+            echo "<td class=rtb width='100'> 팔로잉 목록 </td></tr>";
+            while($row=$result2->fetch_array()){
+                echo "<tr><td>$row[followee_id]</td></tr>";
+            }
+            echo "</table>";
+        }
+        echo "</td></tr></table>";
+        
+        ///////리뷰 보여주는 곳/////////////
+        $query="select * from webtoon_review where user_id='$hostID' order by review_date desc";
                 
         $result=$db->query($query);
                 
@@ -127,11 +165,11 @@
       echo "<tr><td colspan=5>$row[review_content]</td>";
       echo "</tr></table>";
     }
-
-                
         $db->close();
 
         ?>
+        
+
     </div>
     <script>
         

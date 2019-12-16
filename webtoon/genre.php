@@ -7,6 +7,28 @@
 </head>
 
 <body onload="init()">
+        <script>
+        function init() {
+            document.getElementById("default").onclick();
+        }
+
+        function openMenu(target, seltab) {
+            var i, content, tab;
+            content = document.getElementsByClassName("content");
+            for (i = 0; i < content.length; i++) {
+                content[i].style.display = "none";
+            }
+            document.getElementById(target).style.display = "block";
+            tab = document.getElementsByClassName(seltab.className);
+            for (i = 0; i < tab.length; i++) {
+                tab[i].style.backgroundColor = "";
+                tab[i].style.color = "white";
+            }
+            seltab.style.backgroundColor = "white";
+            seltab.style.color = "#fac706";
+        }
+
+    </script>
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
@@ -120,28 +142,7 @@
         <footer id="main_footer"> 통합형 리뷰 포럼 웹 어플리케이션, tooneview </footer>
     </div>
 
-    <script>
-        function init() {
-            document.getElementById("default").onclick();
-        }
 
-        function openMenu(target, seltab) {
-            var i, content, tab;
-            content = document.getElementsByClassName("content");
-            for (i = 0; i < content.length; i++) {
-                content[i].style.display = "none";
-            }
-            document.getElementById(target).style.display = "block";
-            tab = document.getElementsByClassName(seltab.className);
-            for (i = 0; i < tab.length; i++) {
-                tab[i].style.backgroundColor = "";
-                tab[i].style.color = "white";
-            }
-            seltab.style.backgroundColor = "white";
-            seltab.style.color = "#fac706";
-        }
-
-    </script>
 </body>
 
 </html>
