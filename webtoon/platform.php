@@ -1,5 +1,5 @@
 <html>
-
+<?php session_start(); ?>
 <head>
     <meta charset="utf-8">
     <title> home </title>
@@ -33,7 +33,7 @@
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
             <div id="mypage">
-               <?php
+                               <?php
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
             }
