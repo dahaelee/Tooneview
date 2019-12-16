@@ -92,6 +92,32 @@
         </div>
         <!--------------------------------------------------------------->
         <section>
+                    <section>
+            <?php
+                $genre = $_GET["query"];
+                echo "<form action='genre_search.php?query=$genre' method='post'>";
+            ?>         
+    <table>
+        <tr>
+            <td>
+                <select name="searchType" id="searchType"  />
+                <option value="title">제목</option>
+                <option value="artist">작가</option>
+            </td>
+            <td>
+                &nbsp<input type="text" id="searchWord" placeholder="검색어를 입력하세요." name="searchWord" maxlength="30" size="30" />
+            </td>
+            <td>
+                <button class=btn type="submit" size="10">검색</button>
+            </td>
+            
+            </tr>
+                    </table>                     
+
+         <?php
+            echo "</form>";
+            ?>
+                        
             <h1> </h1>
             <?php
                        $genre = $_GET["query"];
