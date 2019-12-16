@@ -1,11 +1,11 @@
-# tooneview
+# Tooneview
 ####
 ## 통합형 웹툰 리뷰 플랫폼
 
 ### 사용 언어 : PHP, Javascript, Css
 ### 제작자 : Lee Dahae, Kim Euna, Lee SooMin from Ewha.W.Univ.
 
-#### 오픈소스 JQuery MIT 라이센스
+#### 이 웹페이지는 오픈소스 JQuery를 사용했습니다.
 
 The MIT License (MIT)
 
