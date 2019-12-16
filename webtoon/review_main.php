@@ -9,7 +9,28 @@
 </head>
 
 <body onload="init()">
+<script>
+        function init() {
+            document.getElementById("default").onclick();
+        }
 
+        function openMenu(target, seltab) {
+            var i, content, tab;
+            content = document.getElementsByClassName("content");
+            for (i = 0; i < content.length; i++) {
+                content[i].style.display = "none";
+            }
+            document.getElementById(target).style.display = "block";
+            tab = document.getElementsByClassName(seltab.className);
+            for (i = 0; i < tab.length; i++) {
+                tab[i].style.backgroundColor = "";
+                tab[i].style.color = "white";
+            }
+            seltab.style.backgroundColor = "white";
+            seltab.style.color = "#fac706";
+        }
+
+    </script>
     <style>
         a:link {
             color: black;
@@ -221,7 +242,8 @@ $web_info=mysqli_query($db, $query);
         <?php
     while($row=$result->fetch_array()){
       echo "<table id=review_table><tr>";
-      echo "<td class=rtb width=100>$row[user_name]</td>";
+      $url = "location.href='myPage.php?hostID=$row[user_id]'";
+      echo "<td class=rtb width=100 onClick=location.href=$url style='cursor:pointer;'>$row[user_name]</td>";
       echo "<td width=120 align=center><font color=#fac706>$row[rate]점</font></td>";    
       echo "<td width=250 align=center>$row[review_date]</td>";
         if(isset($_SESSION['user_id'])){
@@ -237,28 +259,7 @@ $web_info=mysqli_query($db, $query);
         <footer id="main_footer"> 통합형 리뷰 포럼 웹 어플리케이션, tooneview </footer>
     </div>
 
-    <script>
-        function init() {
-            document.getElementById("default").onclick();
-        }
-
-        function openMenu(target, seltab) {
-            var i, content, tab;
-            content = document.getElementsByClassName("content");
-            for (i = 0; i < content.length; i++) {
-                content[i].style.display = "none";
-            }
-            document.getElementById(target).style.display = "block";
-            tab = document.getElementsByClassName(seltab.className);
-            for (i = 0; i < tab.length; i++) {
-                tab[i].style.backgroundColor = "";
-                tab[i].style.color = "white";
-            }
-            seltab.style.backgroundColor = "white";
-            seltab.style.color = "#fac706";
-        }
-
-    </script>
+    
 </body>
 
 </html>
