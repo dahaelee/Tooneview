@@ -10,7 +10,7 @@
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
-            <div id="mypage">               
+            <div id="mypage">
                 <?php
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
@@ -22,13 +22,14 @@
                         <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
                     </td>
                     <td>
-                        <a href='logout.php'>로그아웃</a>
+                        <a href='logout.php'><img src='logout.png' width='40' height='40'></a>
                     </td>
                 </tr>
                 
                 </table> ";
                 }
-            ?></div>
+            ?>
+            </div>
         </header>
 
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
@@ -54,17 +55,17 @@
 
         <div id="Platform" class="content">
             <ul id=tab_list>
-                <li><a href="platform.php?query=네이버">네이버</a></li>
-                <li><a href="platform.php?query=다음">다음</a></li>
-                <li><a href="platform.php?query=레진코믹스">레진코믹스</a></li>
+                <li><a href="platform.php?query=naver">네이버</a></li>
+                <li><a href="platform.php?query=daum">다음</a></li>
+                <li><a href="platform.php?query=lezhin">레진코믹스</a></li>
             </ul>
         </div>
 
         <div id="Age" class="content">
             <ul id=tab_list>
-                <li><a href="age_10.html">10대</a></li>
-                <li><a href="age_20.html">20대</a></li>
-                <li><a href="age_30.html">30대</a></li>
+                <li><a href="age.php?query=10">10대</a></li>
+                <li><a href="age.php?query=20">20대</a></li>
+                <li><a href="age.php?query=30">30대</a></li>
             </ul>
         </div>
 <!--------------------------------------------------------------->
