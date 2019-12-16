@@ -134,9 +134,9 @@
 
         <div id="Platform" class="content">
             <ul id=tab_list>
-                <li><a href="platform.php?query=네이버">네이버</a></li>
-                <li><a href="platform.php?query=다음">다음</a></li>
-                <li><a href="platform.php?query=레진코믹스">레진코믹스</a></li>
+                <li><a href="platform.php?query=naver">네이버</a></li>
+                <li><a href="platform.php?query=daum">다음</a></li>
+                <li><a href="platform.php?query=lezhin">레진코믹스</a></li>
             </ul>
         </div>
 
@@ -168,7 +168,7 @@ $web_info=mysqli_query($db, $query);
 	$artist = $row["artist"];
 	$description = $row["description"];
 	$platform = $row["platform"];
-	echo "<img src = $img_src>";
+	echo "<img src = $img_src style='margin-left: auto; margin-right: auto; display: block;'/>";
 	echo "<h1><br><font size='6'>$name</font><br></h1>";
 	echo "<p text align='center'><b><font size='4'>$description</font></b></p>";
 
@@ -239,12 +239,19 @@ $web_info=mysqli_query($db, $query);
             $result = $conn->query($sql) or die($this->_connect->error);}
         $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
         ?><a href="?ord=<?php echo $ord_rev; ?>">등록일순<?php echo $ord_arrow[$ord_key]; ?></a>
+        
         <?php
     while($row=$result->fetch_array()){
+      $rate_percentage=$row['rate']*20; 
       echo "<table id=review_table><tr>";
       $url = "location.href='myPage.php?hostID=$row[user_id]'";
       echo "<td class=rtb width=100 onClick=location.href=$url style='cursor:pointer;'>$row[user_name]</td>";
-      echo "<td width=120 align=center><font color=#fac706>$row[rate]점</font></td>";    
+      echo "<td width=20></td><td width=50>
+            <div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>
+	       <p style='WIDTH:$rate_percentage%; PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;	HEIGHT: 18px;'>
+	       </p>
+	       </div>
+      </td>";   
       echo "<td width=250 align=center>$row[review_date]</td>";
         if(isset($_SESSION['user_id'])){
             if(strcmp($_SESSION['user_id'],$row['user_id'])==0){
