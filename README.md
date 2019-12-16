@@ -17,7 +17,7 @@
 
 ###
 ### 시작페이지
-https://github.com/dahaeleee/tooneview/webtoon/home.php
+webtoon/home.php
 
 ###
 ### 웹 크롤링
