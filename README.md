@@ -2,23 +2,28 @@
 ####
 ## 통합형 웹툰 리뷰 플랫폼
 
+###
 ### TECH : 
 - PHP
 - Javascript
 - Css
 - Python
 
+###
 ### 제작자
 - [Lee Dahae](https://github.com/dahaelee)
 - [Kim Euna](https://github.com/euna789)
 - [Lee SooMin](https://github.com/vilut1002)
 
+###
 ### 시작페이지
 https://github.com/dahaeleee/tooneview/webtoon/home.php
 
+###
 ### 웹 크롤링
 [이 문서](webtoon/OSP_1125.py)를 참조
 
+####
 #### 이 웹페이지는 오픈소스 JQuery를 사용했습니다.
 
 >The MIT License (MIT)
