@@ -66,26 +66,6 @@
                            
                     
       </table>
-<!--
-    <p><label for="userID">ID</label>
-    <input type="text" id="userID" name="userID" maxlength="13" size="13" /></p>
-    <p><label for="password">password</label>
-    <input type="password" id="password" name="password" maxlength="30" size="30" /></p>
-    <p><label for="nickname">닉네임</label>
-    <input type="text" id="nickname" name="nickname" maxlength="60" size="30" /></p>
-      <p><label for="nickname">생일</label>
-    <input type="date" id="birthday" name="birthday" maxlength="60" size="30" /></p>
-      <p><label for="nickname">성별</label>
-    <select name="sex" id="sex"  />
-          <option value="여자">여자</option>
-          <option value="남자">남자</option>
-      </p>
-  
-  <p><input type="submit" value="회원가입" /></p>
--->
-  
-  </form>
-    </table>
                 </form>
 
             </div>

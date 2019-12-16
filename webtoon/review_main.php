@@ -90,18 +90,18 @@
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
             <div id="mypage">
-                <?php
+             <?php
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
             }
                 else{
                     echo "<table>
-                <tr>
+             <tr>
                     <td>
-                        <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
+                        <a href='mypage.php?hostID=$_SESSION[user_id]'><img src='profile.png' width='40' height='40'></a>
                     </td>
                     <td>
-                        <a href='logout.php'>로그아웃</a>
+                        <a href='logout.php'><img src='logout.png' width='40' height='40'></a>
                     </td>
                 </tr>
                 

@@ -1,5 +1,5 @@
 ﻿<html>
-<!--search result & search & home 수정함-->
+<?php session_start(); ?>
 <head>
     <meta charset="utf-8">
     <title> home </title>
@@ -32,9 +32,9 @@
     <div id="wrapper">
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
-            <div id="mypage">               <?php
+            <div id="mypage">              
                 
-                
+            <?php
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
             }
@@ -42,16 +42,17 @@
                     echo "<table>
                 <tr>
                     <td>
-                        <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
+                        <a href='mypage.php?hostID=$_SESSION[user_id]'><img src='profile.png' width='40' height='40'></a>
                     </td>
                     <td>
-                        <a href='logout.php'>로그아웃</a>
+                        <a href='logout.php'><img src='logout.png' width='40' height='40'></a>
                     </td>
                 </tr>
                 
                 </table> ";
                 }
-            ?></div>
+            ?>
+            </div>
         </header>
 
         <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>

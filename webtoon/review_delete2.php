@@ -22,14 +22,14 @@
 
     </script>
     <?php
-    $webtoon_id=$_GET['toonID'];
+    $hostID = $_GET["hostID"];
 	$conn = mysqli_connect("localhost","root","king");
 	$db = mysqli_select_db($conn,"first");	
     $sql="DELETE FROM webtoon_review WHERE review_id='$_GET[review_id]'";
     $result=$conn->query($sql);
 
       echo "<script>alert('글이 삭제되었습니다');";
-      echo "location.href='review_main.php?toonID=$webtoon_id'</script>";
+      echo "location.href='myPage.php?hostID=$hostID'</script>";
 
      ?>
 
