@@ -130,6 +130,65 @@
         
         $query = "select * from webtoon_info where platform like '%$platform%'";
         $result=mysqli_query($db, $query);
+        $num = mysqli_num_rows($result);    //총 데이터 수
+        
+        $list = 10; //페이지 당 데이터 수
+        $block = 10; //블록 당 페이지 수
+        $pageNum = ceil($num/$list); //총 페이지
+            $page = isset($_GET['page'])?$_GET['page']:1;
+        $blockNum = ceil($pageNum/$block); //총 블록
+        $nowBlock = ceil($page/$block);
+        
+        $s_page = ($nowBlock*$block)-($block -1); //시작 페이지
+        if ($s_page <=1){
+            $s_page = 1;
+        }
+        $e_page = $nowBlock*$block; //종료 페이지
+        if($pageNum<=$e_page){
+            $e_page = $pageNum;
+        }
+        ?>                
+        <p style='text-align:center'>
+        <?php
+            if($page>1){    //첫 페이지면 이전으로 못가게
+                ?>
+                <a href="<?=$_SERVER['PHP_SELF']?>?query=<?=$platform?>&page=<?=$page-1?>">이전</a>
+            <?php
+            }
+            else{
+                ?>
+                <a href="<?=$_SERVER['PHP_SELF']?>?query=<?=$platform?>&page=<?=$page?>">이전</a>
+            <?php
+            }
+        for($p=$s_page;$p<=$e_page;$p++){   //페이지 수 띄우기
+            if($p==$page){
+                ?>
+                <a href="<?=$_SERVER['PHP_SELF']?>?query=<?=$platform?>&page=<?=$p?>"><b><?=$p?></b></a>
+            <?php
+            }
+            else{
+            ?>
+                        <a href="<?=$_SERVER['PHP_SELF']?>?query=<?=$platform?>&page=<?=$p?>"><?=$p?></a>
+                        <?php
+                
+            }
+            
+        }
+            if($page<$e_page){  //마지막 페이지면 다음으로 못가게
+                ?>
+                <a href="<?=$_SERVER['PHP_SELF']?>?query=<?=$platform?>&page=<?=$page+1?>">다음</a>
+            <?php
+            }
+            else{
+                ?>
+                <a href="<?=$_SERVER['PHP_SELF']?>?query=<?=$platform?>&page=<?=$page?>">다음</a>
+            <?php } ?>
+    </p>            
+            <?php
+            $s_point = ($page-1) * $list;
+            $query = "select * from webtoon_info where platform like '%$platform%' LIMIT $s_point,$list";
+        $result=mysqli_query($db, $query);
+        
         $row=mysqli_fetch_array($result);
             $resultArr=array();
             while($r=mysqli_fetch_assoc($result)){
