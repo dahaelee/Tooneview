@@ -158,12 +158,9 @@
             //webtoon_id는 $row['webtoon_id']로 받아오면됨
 	       $webtoon_id = $row['webtoon_id'];
             $webtoon_name=$row['webtoon_name'];
-                echo " <a class='article' href='review_main.php?toonID=$webtoon_id'>
-                <p> 
-                $webtoon_name
-                </p>
-            </a>";    
+                
                  echo "<br/>";  
+                 $name=$row["webtoon_name"];
                 $img_src = $row["img_src"];
                 $artist = $row["artist"];
                 
@@ -172,7 +169,7 @@
                 $row=mysqli_fetch_array($rate_info);
                 $rate=$row['rate'];
                 $rate_percentage=$rate*20;
-                
+               
                 echo "<a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>";
                 
                 echo "<table><tr>
@@ -225,6 +222,7 @@
 	            </div>
                 </td>
                 </tr></table></a>";
+            }
             }  
 
      $db->close();
