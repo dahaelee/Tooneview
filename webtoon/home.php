@@ -92,7 +92,7 @@
                 tab[i].style.color = "white";
             }
             seltab.style.backgroundColor = "white";
-            seltab.style.color = "#fac706";
+            seltab.style.color = "#ff7a1b";
         }
 
     </script>
@@ -219,7 +219,7 @@ $result = $conn->query($sql) or die($this->_connect->error);
       if($today_count<=10){
       $url = "location.href='review_main.php?toonID=$row[webtoon_id]'";
       echo "<tr onClick=$url style='cursor:pointer;'>
-            <td width='30'><font color=#fac706>$today_count</font></td>
+            <td width='30'><font color=#ff7a1b>$today_count</font></td>
             <td><img src=$row[thumbnail] width='57' height='57'></td>
             <td>$row[title]</td>
             </tr></a>";
@@ -237,7 +237,7 @@ $result = $conn->query($sql) or die($this->_connect->error);
       if($weekly_count<=10){
       $url = "location.href='review_main.php?toonID=$row[webtoon_id]'";
       echo "<tr onClick=$url style='cursor:pointer;'>
-            <td width='30'><font color=#fac706>$weekly_count</font></td>
+            <td width='30'><font color=#ff7a1b>$weekly_count</font></td>
             <td><img src=$row[thumbnail] width='57' height='57'></td>
             <td>$row[title]</td>
             </tr>";

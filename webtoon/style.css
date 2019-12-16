@@ -38,11 +38,11 @@ a:hover { color: black; text-decoration: none;}
 }
 
 .tab {
-    background-color: #fac706;
+    background-color: #ff7a1b;
     color: white;
     float: left;
     border: none;
-    outline:2px solid #fac706;
+    outline:2px solid #ff7a1b;
     cursor: pointer;
     padding: 8px 16px;
     font-size: 17px;
@@ -52,8 +52,8 @@ a:hover { color: black; text-decoration: none;}
 }
 
 .tab:hover {
-    background-color: #fcdd6a;
-    outline:2px solid #fac706;
+    background-color: #ffaf76;
+    outline:2px solid #ff7a1b;
 }
 
 .content{
@@ -80,13 +80,13 @@ a:hover { color: black; text-decoration: none;}
     float: left; 
     width: 400px; 
     margin: 0 15 15 0; 
-    border: 3px solid #fac706; 
+    border: 3px solid #ff7a1b; 
     padding: 15px;
 } 
 
 #main_section h1{
     text-align: center; 
-    color:#fac706;
+    color:#ff7a1b;
     padding-bottom: 15;
 }
 
@@ -98,20 +98,20 @@ a:hover { color: black; text-decoration: none;}
 }
 
 .article:hover{
-    background-color: #fcdd6a;
+    background-color: #ffaf76;
 }
 
 #main_aside{ 
 	float: left; 
     width: 210px; 
     margin: 0 15 15 0; 
-    border: 3px solid #fac706; 
+    border: 3px solid #ff7a1b; 
     padding: 15px;
 }
 
 #main_aside h1{
     text-align: center; 
-    color:#fac706;
+    color:#ff7a1b;
     padding-bottom: 15;
 }
 
@@ -131,7 +131,7 @@ a:hover { color: black; text-decoration: none;}
 }
 
 .rank_table tr:hover{
-        background-color:#fcdd6a;
+        background-color:#ffaf76;
 }
 
 #main_footer{ clear: both; 
@@ -155,7 +155,7 @@ a:hover { color: black; text-decoration: none;}
 .login{
     text-align: center; 
     width: 230px; margin: 20px;
-    color:#fac706;
+    color:#ff7a1b;
     font: bold 20px verdana, sans-serif
 }
 
@@ -189,7 +189,7 @@ a:hover { color: black; text-decoration: none;}
 }
 
 #container { background : white; 
-	border:5px solid #fac706; 
+	border:5px solid #ff7a1b; 
 	padding: 20px; 
 	margin-bottom: 15px; }
 
@@ -248,7 +248,7 @@ input{
     text-align: center;
     margin-top: 10px;
     border: none;
-    background-color: #fac706;
+    background-color: #ff7a1b;
     color:white;
     font-size:15px;
     padding-top:10px;
@@ -257,5 +257,5 @@ input{
 }
 
 .btn:hover{
-    background-color: #fcdd6a;
+    background-color: #ffaf76;
 }
