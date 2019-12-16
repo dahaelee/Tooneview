@@ -7,7 +7,7 @@
 </head>
 
 <body onload="init()">
-    <script>
+        <script>
         function init() {
             document.getElementById("default").onclick();
         }
@@ -54,8 +54,8 @@
             </div>
         </header>
 
-        <button id="genre" class="tab" onclick="openMenu('Genre', this)">장르</button>
-        <button id="default" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
+        <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
+        <button id="platform" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
         <button id="age" class="tab" onclick="openMenu('Age', this)">연령대</button>
         <a href="search.php"><button class="tab"><img src="search.png" width="23" height="23"></button></a>
 
@@ -91,10 +91,10 @@
             </ul>
         </div>
         <!--------------------------------------------------------------->
-<section>
+        <section>
             <?php
-                $platform = $_GET["query"];
-                echo "<form action='platform_search.php?query=$platform' method='post'>";
+                $genre = $_GET["query"];
+                echo "<form action='genre_search.php?query=$genre' method='post'>";
             ?>         
     <table>
         <tr>
@@ -117,10 +117,16 @@
             echo "</form>";
             ?>
 
-            
-            <h1> </h1>
+           
+            <h1>  </h1>
             <?php
-                       $platform = $_GET["query"];
+    $searchType=$_POST['searchType'];
+    $searchWord=$_POST['searchWord'];
+        if ($searchWord==NULL) 
+           {
+       echo "<p>검색어를 입력해주세요.</p>";
+       exit;
+    }  else{
             @$db = mysqli_connect('localhost', 'root', 'king', 'first');
     if (mysqli_connect_errno()) {
        echo "<p>Error: Could not connect to database.<br/>
@@ -128,63 +134,62 @@
        exit;
     }
         
-        $query = "select * from webtoon_info where platform like '%$platform%'";
-        $result=mysqli_query($db, $query);
-        $row=mysqli_fetch_array($result);
+        if($searchType=='title'){
+            $query = "select * from webtoon_info where webtoon_name like '%$searchWord%' and genre like '%$genre%'";
+            //select webtoon_id from webtoon_info where genre like '%일상%';
+        }
+            else if($searchType=='artist'){
+                $query = "select * from webtoon_info where artist like '$searchWord' and genre like '%$genre%'";
+            }
+            $result=mysqli_query($db, $query);
+            $row=mysqli_fetch_array($result);
             $resultArr=array();
             while($r=mysqli_fetch_assoc($result)){
                 $resultArr[]=$r;
             }
-            
-        $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
-            echo"<table>
-                <tr width=100><td><h1>$platform</h1></td><td>$i</td></tr>
-            </table>";
-	//echo count($resultArr);
-            echo"<br>";
- 
-                        
-            for($count=0;$count<count($resultArr);$count++){
+            echo $i;
+            if($i==0){
+                echo "검색결과가 없습니다.";
+            }
+            if($i>0){
+            //첫번째요소는 이렇게 받아오기
+            //webtoon_id는 $row['webtoon_id']로 받아오면됨
+	$webtoon_id = $row['webtoon_id'];
+            $webtoon_name=$row['webtoon_name'];
+                echo " <a class='article' href='review_main.php?toonID=$webtoon_id'>
+                <p> 
+                $webtoon_name
+                </p>
+            </a>";    
+                 echo "<br/>";  
+            //두번째 요소부터 이렇게 받아오기
+            //webtoon_id는 $resulta['webtoon_id로 받아오면 됨
+            for($count=0;$count<$i-1;$count++){
                 $resulta=$resultArr[$count];
+	$webtoon_id = $resulta['webtoon_id'];
                 $name= $resulta["webtoon_name"];
-                $img_src = $resulta["img_src"];
-                $artist = $resulta["artist"];
-                $webtoon_id=$resulta["webtoon_id"];
-                
-                $query1 = "select AVG(rate) as rate from webtoon_review where webtoon_id ='$webtoon_id'" ;
-                $rate_info=mysqli_query($db, $query1);
-                $row=mysqli_fetch_array($rate_info);
-                $rate=$row['rate'];
-                $rate_percentage=$rate*20;
-                
-                echo "<a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>";
-                
-                echo "<table><tr>
-                <td width=150></td>
-                <td><img src=$img_src width = '110' height='110'></td>
-                <td width=60></td>
-                <td width=400 align='center'><h1>$name</h1></td>
-                <td width=400 align='center'><font color=#fac706><h1>$artist</h1></font></td>
-                <td width=30></td>
-                <td width=300>
-                <div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>
-	            <p style='WIDTH:$rate_percentage%; PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;	HEIGHT: 18px;'>
-	            </p>
-	            </div>
-                </td>
-                </tr></table></a>";
-            }  
+                echo " <a class='article' href='review_main.php?toonID=$webtoon_id'>
+                <p>
+                   $name
+                </p>
+            </a>";    
+                 echo "<br/>";  
+            }
+            }
 
 
      $db->close();
+        }
+
             ?>
+            
         </section>
 
         <footer id="main_footer"> 통합형 리뷰 포럼 웹 어플리케이션, tooneview </footer>
     </div>
 
-    
+ 
 </body>
 
 </html>
