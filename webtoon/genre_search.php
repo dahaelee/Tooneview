@@ -1,5 +1,5 @@
 <html>
-
+<?php session_start(); ?>
 <head>
     <meta charset="utf-8">
     <title> home </title>
@@ -33,15 +33,15 @@
         <header id="main_header">
             <a href="home.php"><img src="logo.png" width="144" height="93"></a>
             <div id="mypage">
-                <?php
+                 <?php
             if(!isset($_SESSION['user_id']) ) {
                 echo '<a href="registration.php">회원가입 </a><a href="login.html"> 로그인</a>';
             }
                 else{
                     echo "<table>
-                <tr>
+             <tr>
                     <td>
-                        <a href='mypage.php'><img src='profile.png' width='40' height='40'></a>
+                        <a href='mypage.php?hostID=$_SESSION[user_id]'><img src='profile.png' width='40' height='40'></a>
                     </td>
                     <td>
                         <a href='logout.php'><img src='logout.png' width='40' height='40'></a>
@@ -149,10 +149,54 @@
             }
         $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
-            echo"<table>
-                <tr width=100><td><h1>$genre</h1></td><td>$i</td></tr>
-            </table>";
 	//echo count($resultArr);
+            
+            if($i==0){
+                echo "검색결과가 없습니다.";
+            }
+            if($i>0){
+            //첫번째요소는 이렇게 받아오기
+            //webtoon_id는 $row['webtoon_id']로 받아오면됨
+	       $webtoon_id = $row['webtoon_id'];
+            $webtoon_name=$row['webtoon_name'];
+                echo " <a class='article' href='review_main.php?toonID=$webtoon_id'>
+                <p> 
+                $webtoon_name
+                </p>
+            </a>";    
+                 echo "<br/>";  
+                $img_src = $row["img_src"];
+                $artist = $row["artist"];
+                
+                $query1 = "select AVG(rate) as rate from webtoon_review where webtoon_id ='$webtoon_id'" ;
+                $rate_info=mysqli_query($db, $query1);
+                $row=mysqli_fetch_array($rate_info);
+                $rate=$row['rate'];
+                $rate_percentage=$rate*20;
+                
+                echo "<a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>";
+                
+                echo "<table><tr>
+                <td width=150></td>
+                <td><img src=$img_src width = '110' height='110'></td>
+                <td width=60></td>
+                <td width=400 align='center'><h1>$name</h1></td>
+                <td width=400 align='center'><font color=#fac706><h1>$artist</h1></font></td>
+                <td width=30></td>
+                <td width=300>
+                <div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>
+	            <p style='WIDTH:$rate_percentage%; PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;	HEIGHT: 18px;'>
+	            </p>
+	            </div>
+                </td>
+                </tr></table></a>";
+                
+                
+                
+                
+                
+                
+                
             echo"<br>";
             
             for($count=0;$count<count($resultArr);$count++){
@@ -185,7 +229,7 @@
                 </td>
                 </tr></table></a>";
             }  
-
+            }
 
      $db->close();
         }
