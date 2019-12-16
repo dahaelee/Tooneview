@@ -17,7 +17,7 @@
 https://github.com/dahaeleee/tooneview/webtoon/home.php
 
 ### 웹 크롤링
-[이 문서](https://github.com/dahaelee/tooneview/webtoon/OSP_1125.py)를 참조
+[이 문서](webtoon/OSP_1125.py)를 참조
 
 #### 이 웹페이지는 오픈소스 JQuery를 사용했습니다.
 
