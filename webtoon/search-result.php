@@ -9,7 +9,7 @@
 <body onload="init()">
        <script>
         function init() {
-            document.getElementById("default").onclick();
+            document.getElementById("genre").onclick();
         }
 
         function openMenu(target, seltab) {
@@ -25,7 +25,7 @@
                 tab[i].style.color = "white";
             }
             seltab.style.backgroundColor = "white";
-            seltab.style.color = "#fac706";
+            seltab.style.color = "#ff7a1b";
         }
 
     </script>
@@ -55,39 +55,40 @@
             </div>
         </header>
 
-        <button id="default" class="tab" onclick="openMenu('Genre', this)">장르</button>
-        <button id="platform" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
+        <button id="genre" class="tab" onclick="openMenu('Genre', this)">장르</button>
+        <button id="default" class="tab" onclick="openMenu('Platform', this)">플랫폼</button>
         <button id="age" class="tab" onclick="openMenu('Age', this)">연령대</button>
-        <button class="tab"><a href="search.php"></a><img src="search.png" width="22.5" height="22.5"></button>
+        <a href="search.php"><button class="tab"><img src="search.png" width="23" height="23"></button></a>
 
         <div id="Genre" class="content">
             <ul id=tab_list>
-                    <li><a href="genre_ilsang.php">일상</a></li>
-                    <li><a href="genre_gag.html">개그</a></li>
-                    <li><a href="genre_fantasy.html">판타지</a></li>
-                    <li><a href="genre_action.html">액션</a></li>
-                    <li><a href="genre_drama.html">드라마</a></li>
-                    <li><a href="genre_soonjeong.html">순정</a></li>
-                    <li><a href="genre_gamseong.html">감성</a></li>
-                    <li><a href="genre_thriller.html">스릴러</a></li>
-                    <li><a href="genre_sidae.html">시대극</a></li>
-                    <li><a href="genre_sports.html">스포츠</a></li>
+
+                <li><a href="genre.php?query=일상">일상</a></li>
+                <li><a href="genre.php?query=개그">개그</a></li>
+                <li><a href="genre.php?query=판타지">판타지</a></li>
+                <li><a href="genre.php?query=액션">액션</a></li>
+                <li><a href="genre.php?query=드라마">드라마</a></li>
+                <li><a href="genre.php?query=순정">순정</a></li>
+                <li><a href="genre.php?query=감성">감성</a></li>
+                <li><a href="genre.php?query=스릴러">스릴러</a></li>
+                <li><a href="genre.php?query=시대극">시대극</a></li>
+                <li><a href="genre.php?query=스포츠">스포츠</a></li>
             </ul>
         </div>
 
         <div id="Platform" class="content">
             <ul id=tab_list>
-                <li><a href="platform.php?query=네이버">네이버</a></li>
-                <li><a href="platform.php?query=다음">다음</a></li>
-                <li><a href="platform.php?query=레진코믹스">레진코믹스</a></li>
+                <li><a href="platform.php?query=naver">네이버</a></li>
+                <li><a href="platform.php?query=daum">다음</a></li>
+                <li><a href="platform.php?query=lezhin">레진코믹스</a></li>
             </ul>
         </div>
 
         <div id="Age" class="content">
             <ul id=tab_list>
-                <li><a href="age_10.html">10대</a></li>
-                <li><a href="age_20.html">20대</a></li>
-                <li><a href="age_30.html">30대</a></li>
+                <li><a href="age.php?query=10">10대</a></li>
+                <li><a href="age.php?query=20">20대</a></li>
+                <li><a href="age.php?query=30">30대</a></li>
             </ul>
         </div>
 <!--------------------------------------------------------------->
@@ -124,6 +125,45 @@
                     $webtoon_name=$row['webtoon_name'];
             $i=$result->num_rows;
 
+             if($i==0){
+                echo "검색결과가 없습니다.";
+            }
+            if($i>0){
+            //첫번째요소는 이렇게 받아오기
+            //webtoon_id는 $row['webtoon_id']로 받아오면됨
+	       $webtoon_id = $row['webtoon_id'];
+            $webtoon_name=$row['webtoon_name'];
+                
+                 echo "<br/>";  
+                 $name=$row["webtoon_name"];
+                $img_src = $row["img_src"];
+                $artist = $row["artist"];
+                
+                $query1 = "select AVG(rate) as rate from webtoon_review where webtoon_id ='$webtoon_id'" ;
+                $rate_info=mysqli_query($db, $query1);
+                $row=mysqli_fetch_array($rate_info);
+                $rate=$row['rate'];
+                $rate_percentage=$rate*20;
+               
+                echo "<a class='article' href='review_main.php?toonID=$webtoon_id' width='300' height='130'>";
+                
+                echo "<table><tr>
+                <td width=150></td>
+                <td><img src=$img_src width = '110' height='110'></td>
+                <td width=60></td>
+                <td width=400 align='center'><h1>$name</h1></td>
+                <td width=400 align='center'><font color=#ff7a1b><h1>$artist</h1></font></td>
+                <td width=30></td>
+                <td width=300>
+                <div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>
+	            <p style='WIDTH:$rate_percentage%; PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;	HEIGHT: 18px;'>
+	            </p>
+	            </div>
+                </td>
+                </tr></table></a>";
+            
+            
+            
 	//echo count($resultArr);
             echo"<br>";
             
@@ -147,7 +187,7 @@
                 <td><img src=$img_src width = '110' height='110'></td>
                 <td width=60></td>
                 <td width=400 align='center'><h1>$name</h1></td>
-                <td width=400 align='center'><font color=#fac706><h1>$artist</h1></font></td>
+                <td width=400 align='center'><font color=#ff7a1b><h1>$artist</h1></font></td>
                 <td width=30></td>
                 <td width=300>
                 <div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>
@@ -157,7 +197,7 @@
                 </td>
                 </tr></table></a>";
             }  
-
+            }
      $db->close();
         }
 

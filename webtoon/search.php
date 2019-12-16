@@ -25,7 +25,7 @@
                 tab[i].style.color = "white";
             }
             seltab.style.backgroundColor = "white";
-            seltab.style.color = "#fac706";
+            seltab.style.color = "#ff7a1b";
         }
 
     </script>

@@ -25,7 +25,7 @@
                 tab[i].style.color = "white";
             }
             seltab.style.backgroundColor = "white";
-            seltab.style.color = "#fac706";
+            seltab.style.color = "#ff7a1b";
         }
 
     </script>
@@ -146,7 +146,7 @@
                 <td><img src=$img_src width = '110' height='110'></td>
                 <td width=60></td>
                 <td width=400 align='center'><h1>$name</h1></td>
-                <td width=400 align='center'><font color=#fac706><h1>$artist</h1></font></td>
+                <td width=400 align='center'><font color=#ff7a1b><h1>$artist</h1></font></td>
                 <td width=30></td>
                 <td width=300>
                 <div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>

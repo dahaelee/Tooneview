@@ -27,7 +27,7 @@
                 tab[i].style.color = "white";
             }
             seltab.style.backgroundColor = "white";
-            seltab.style.color = "#fac706";
+            seltab.style.color = "#ff7a1b";
         }
 
     </script>
@@ -43,7 +43,7 @@
         }
 
         a:hover {
-            color: #fac706;
+            color: #ff7a1b;
             text-decoration: none;
         }
 
@@ -205,12 +205,12 @@ $web_info=mysqli_query($db, $query);
                     </td>
                 </tr>
                 <tr>
-                    <td colspan=4 align=right><input type='submit' value='등록'></td>
+                    <td colspan=4 align=right><input type='submit'  class=btn value='등록'></td>
                 </tr>    
             </table>
         </form>";}
         
-        else echo "<table id='review_table'><tr><td><font color=#fac706>리뷰를 작성하시려면 로그인하세요.</font></tr></td></table>";
+        else echo "<table id='review_table'><tr><td><font color=#ff7a1b>리뷰를 작성하시려면 로그인하세요.</font></tr></td></table>";
         ?>
 
         <?php       
