@@ -139,7 +139,7 @@
             //select webtoon_id from webtoon_info where genre like '%일상%';
         }
             else if($searchType=='artist'){
-                $query = "select * from webtoon_info where artist like '$searchWord' and platform like '%$platform%'";
+                $query = "select * from webtoon_info where artist like '%$searchWord%' and platform like '%$platform%'";
             }
             $result=mysqli_query($db, $query);
             $row=mysqli_fetch_array($result);
@@ -191,7 +191,6 @@
             
             
 	//echo count($resultArr);
-            echo"<br>";
             
             for($count=0;$count<count($resultArr);$count++){
                 $resulta=$resultArr[$count];

@@ -165,7 +165,6 @@
             
             
 	//echo count($resultArr);
-            echo"<br>";
             
             for($count=0;$count<count($resultArr);$count++){
                 $resulta=$resultArr[$count];

@@ -129,7 +129,7 @@
             $e_page = $pageNum;
         }
         ?>                
-        <p style='text-align:center'>
+        <p style='text-align:right'>
         <?php
             if($page>1){    //첫 페이지면 이전으로 못가게
                 ?>

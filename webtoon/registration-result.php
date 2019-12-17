@@ -39,7 +39,7 @@
 
         if ($stmt->affected_rows > 0) {
         echo  "<p>회원가입이 완료되었습니다.</p><br>";
-        echo $nickname."님 환영합니다.";
+        echo $nickname."님 환영합니다. 로그인 후 이용해주세요!";
     } else {
         echo "<p>An error has occurred.<br/>
               The item was not added.</p>";

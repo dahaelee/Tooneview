@@ -99,13 +99,14 @@
     <section id='main_section'>    
     <table>
         <tr>
+            <td width=30></td>
             <td>
                 <select name="searchType" id="searchType"  />
                 <option value="title">제목</option>
                 <option value="artist">작가</option>
             </td>
             <td>
-                &nbsp<input type="text" id="searchWord" placeholder="검색어를 입력하세요." name="searchWord" maxlength="30" size="30" />
+                <input type="text" id="searchWord" placeholder="검색어를 입력하세요." name="searchWord" maxlength="30" size="30" />
             </td>
             <td width='150'>
                 <button class=btn type="submit" size="10">검색</button>
@@ -161,7 +162,7 @@
             $e_page = $pageNum;
         }
         ?>                
-        <p style='text-align:center'>
+        <p style='text-align:right'>
         <?php
             if($page>1){    //첫 페이지면 이전으로 못가게
                 ?>

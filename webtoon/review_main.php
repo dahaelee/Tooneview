@@ -212,22 +212,8 @@ $web_info=mysqli_query($db, $query);
         
         else echo "<table id='review_table'><tr><td><font color=#ff7a1b>리뷰를 작성하시려면 로그인하세요.</font></tr></td></table>";
         ?>
-
-        <?php       
-        $ord_array = array('desc','asc'); 
-        $ord_arrow = array('▼','▲'); 
-        $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[1]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(오름차순)
-        $ord_key = array_search($ord,$ord_array); // 해당 키 찾기 (0, 1)
-        if($ord_key==1){
-            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY rate DESC";
-            $result = $conn->query($sql) or die($this->_connect->error);}
-        else{
-            $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY rate ASC";
-            $result = $conn->query($sql) or die($this->_connect->error);}
-        $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
-        ?><a href="?ord=<?php echo $ord_rev; ?>">별점순<?php echo $ord_arrow[$ord_key]; ?></a>
        
-        <?php       
+               <?php       
         $ord_array = array('desc','asc'); 
         $ord_arrow = array('▼','▲'); 
         $ord = isset($_REQUEST['ord']) && in_array($_REQUEST['ord'],$ord_array) ? $_REQUEST['ord'] : $ord_array[0]; // 지정된 정렬이면 그 값, 아니면 기본 정렬(내림차순)
@@ -239,7 +225,9 @@ $web_info=mysqli_query($db, $query);
             $sql = "SELECT * FROM webtoon_review WHERE webtoon_id=$webtoon_id ORDER BY review_id ASC";
             $result = $conn->query($sql) or die($this->_connect->error);}
         $ord_rev = $ord_array[($ord_key+1)%2]; // 내림차순→오름차순, 오름차순→내림차순
-        ?><a href="?ord=<?php echo $ord_rev; ?>">등록일순<?php echo $ord_arrow[$ord_key]; ?></a>
+        $toonID=$_GET['toonID'];
+        $url="review_main.php?toonID=$toonID&ord=$ord_rev";
+        echo"<a href=$url>등록일순"; echo $ord_arrow[$ord_key]; echo"</a>"?>
         
         <?php
     while($row=$result->fetch_array()){
@@ -247,17 +235,23 @@ $web_info=mysqli_query($db, $query);
       echo "<table id=review_table><tr>";
       $url = "location.href='myPage.php?hostID=$row[user_id]'";
       echo "<td class=rtb width=100 onClick=location.href=$url style='cursor:pointer;'>$row[user_name]</td>";
-      echo "<td width=20></td><td width=50>
+      echo "<td width=20></td><td width=100>
             <div style='CLEAR:both;	PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND:url(icon_star2.gif) 0px 0px; FLOAT:left; PADDING-BOTTOM: 0px; MARGIN:0px; WIDTH: 90px; PADDING-TOP:0px; HEIGHT:18px;'>
 	       <p style='WIDTH:$rate_percentage%; PADDING-RIGHT:0px;	PADDING-LEFT:0px; BACKGROUND: url(icon_star.gif) 0px 0px; PADDING-BOTTOM:0px; MARGIN:0px; PADDING-TOP:0px;	HEIGHT: 18px;'>
 	       </p>
 	       </div>
       </td>";   
-      echo "<td width=250 align=center>$row[review_date]</td>";
+      echo "<td width=200 align=center>$row[review_date]</td>";
         if(isset($_SESSION['user_id'])){
             if(strcmp($_SESSION['user_id'],$row['user_id'])==0){
-                echo "<td class=rtb width=100><a href='review_delete.php?review_id=$row[review_id]'>삭제</a></td></tr>";
+                $toonID=$_GET['toonID'];
+                $review_id=$row['review_id'];
+                $url="review_delete.php?toonID=$toonID&review_id=$review_id";
+                echo "<td class=rtb width=100><a href=$url>삭제</a></td></tr>";
             }
+                    else{
+            echo"<td width=300></td>";
+        }
         }
       echo "<tr><td colspan=5>$row[review_content]</td>";
       echo "</tr></table>";
