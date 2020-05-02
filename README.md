@@ -20,6 +20,10 @@
 https://github.com/dahaelee/tooneview/blob/master/webtoon/home.php
 
 ###
+### 홈페이지 접속 영상 유튜브 링크
+https://youtu.be/qN0y5UWB3to
+
+###
 ### 웹 크롤링
 [이 문서](webtoon/OSP_1125.py)를 참조
 
