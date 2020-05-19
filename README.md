@@ -20,7 +20,7 @@
 https://github.com/dahaelee/tooneview/blob/master/webtoon/home.php
 
 ###
-### 홈페이지 접속 영상 유튜브 링크
+### 데모 비디오
 https://youtu.be/qN0y5UWB3to
 
 ###
